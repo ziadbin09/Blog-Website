@@ -22,13 +22,11 @@ const LINKS = [
 export default function Header() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-
-  if (pathname.startsWith('/watch')) return null;
+  const isWatch = pathname.startsWith('/watch');
 
   const isActive = (href: string) =>
     href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(href + '/');
 
-  // close the mobile menu whenever the route changes
   useEffect(() => {
     setMenuOpen(false);
   }, [pathname]);
@@ -36,57 +34,64 @@ export default function Header() {
   return (
     <header className="site-header">
       <div className="wrap nav">
-        <Link className="brand" href="/" data-nav>
-          <BrandMark />
-          <span className="name">
-            Vita<b>lis</b>
+        {/* Brand — not clickable in watch mode */}
+        {isWatch ? (
+          <span className="brand" style={{ cursor: 'default' }}>
+            <BrandMark />
+            <span className="name">Vita<b>lis</b></span>
           </span>
-        </Link>
+        ) : (
+          <Link className="brand" href="/" data-nav>
+            <BrandMark />
+            <span className="name">Vita<b>lis</b></span>
+          </Link>
+        )}
+
+        {/* Nav links — disabled in watch mode */}
         <nav className="nav-links">
           {LINKS.map((l) => (
-            <Link key={l.href} href={l.href} data-nav className={isActive(l.href) ? 'active' : undefined}>
-              {l.label}
-            </Link>
+            isWatch ? (
+              <span
+                key={l.href}
+                style={{ opacity: 0.35, cursor: 'not-allowed', userSelect: 'none', fontSize: 14 }}
+              >
+                {l.label}
+              </span>
+            ) : (
+              <Link key={l.href} href={l.href} data-nav className={isActive(l.href) ? 'active' : undefined}>
+                {l.label}
+              </Link>
+            )
           ))}
         </nav>
+
         <div className="nav-cta">
-          <Link className="btn btn-primary" href="/app" data-nav>
-            Get the App
-          </Link>
+          {isWatch ? (
+            <span
+              className="btn btn-primary"
+              style={{ opacity: 0.35, cursor: 'not-allowed', userSelect: 'none' }}
+            >
+              Get the App
+            </span>
+          ) : (
+            <Link className="btn btn-primary" href="/app" data-nav>
+              Get the App
+            </Link>
+          )}
           <button
             type="button"
             className="nav-toggle"
             aria-label="Toggle menu"
             aria-expanded={menuOpen}
-            onClick={() => setMenuOpen((v) => !v)}
+            onClick={() => !isWatch && setMenuOpen((v) => !v)}
+            style={isWatch ? { opacity: 0.35, cursor: 'not-allowed' } : {}}
           >
-            {menuOpen ? (
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-              </svg>
-            ) : (
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <line x1="3" y1="12" x2="21" y2="12"></line>
-                <line x1="3" y1="18" x2="21" y2="18"></line>
-              </svg>
-            )}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
           </button>
-        </div>
-      </div>
-
-      {/* mobile slide-down menu (Get the App is the CTA button below, so skip it as a link) */}
-      <div className={`mobile-menu${menuOpen ? ' open' : ''}`}>
-        <div className="wrap">
-          {LINKS.filter((l) => l.href !== '/app').map((l) => (
-            <Link key={l.href} href={l.href} data-nav className={isActive(l.href) ? 'active' : undefined}>
-              {l.label}
-            </Link>
-          ))}
-          <Link className="btn btn-primary" href="/app" data-nav>
-            Get the App
-          </Link>
         </div>
       </div>
     </header>
