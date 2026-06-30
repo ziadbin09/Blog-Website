@@ -8,10 +8,10 @@ const NOVAPLEX_DOMAIN = 'novaplex-links.pages.dev';
 const STEP_TIMER = 15;
 
 const STEPS = [
-  { label: 'Home',         btn: 'Continue to Research →' },
-  { label: 'Research',     btn: 'Continue to Latest Study →' },
-  { label: 'Latest Study', btn: 'Get the App →' },
-  { label: 'Get the App',  btn: 'Open in NovaPlex →' },
+  { label: 'Home',    btn: 'Continue to Reviews →' },
+  { label: 'Reviews', btn: 'Continue to Latest →' },
+  { label: 'Latest',  btn: 'Get the App →' },
+  { label: 'Get the App', btn: 'Open in NovaPlex →' },
 ];
 
 // Replace with your PropellerAds / ad network interstitial script.
@@ -19,7 +19,7 @@ function fireInterstitial(onComplete: () => void) {
   onComplete(); // PLACEHOLDER
 }
 
-// ── Shared: timer banner shown at top of each step ────────────────────────────
+// ── Shared: timer banner ──────────────────────────────────────────────────────
 function TimerBanner({ timeLeft, ready, step }: { timeLeft: number; ready: boolean; step: number }) {
   const pct = ((STEP_TIMER - timeLeft) / STEP_TIMER) * 100;
   return (
@@ -28,7 +28,6 @@ function TimerBanner({ timeLeft, ready, step }: { timeLeft: number; ready: boole
       padding: '14px 28px',
       display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap',
     }}>
-      {/* Step progress */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
         {STEPS.map((s, i) => (
           <div key={s.label} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
@@ -67,7 +66,7 @@ function TimerBanner({ timeLeft, ready, step }: { timeLeft: number; ready: boole
   );
 }
 
-// ── Continue button shown at very bottom of page ──────────────────────────────
+// ── Continue button at very bottom ────────────────────────────────────────────
 function ContinueButton({ ready, onClick, label }: { ready: boolean; onClick: () => void; label: string }) {
   return (
     <div style={{ padding: '60px 28px 80px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16, borderTop: '1px solid var(--border)', background: 'var(--bg)' }}>
@@ -101,7 +100,7 @@ function ContinueButton({ ready, onClick, label }: { ready: boolean; onClick: ()
   );
 }
 
-// ── Step 0: Home (full length) ────────────────────────────────────────────────
+// ── Step 0: Home ──────────────────────────────────────────────────────────────
 function Step0({ ready, onContinue }: { ready: boolean; onContinue: () => void }) {
   return (
     <>
@@ -109,17 +108,16 @@ function Step0({ ready, onContinue }: { ready: boolean; onContinue: () => void }
         <AdSlot size="large" id="w0-top" tall />
       </div>
 
-      {/* Hero */}
       <section className="wrap" style={{ padding: '48px 28px 24px' }}>
-        <span className="eyebrow">Peer-reviewed, plainly explained</span>
+        <span className="eyebrow">Android · iOS · Reviews · How-To</span>
         <h1 style={{ fontSize: 'clamp(44px,7vw,84px)', maxWidth: '14ch', margin: '20px 0 22px' }}>
-          The science of medicine, read clearly.
+          Mobile tech, explained simply.
         </h1>
         <p className="muted" style={{ fontSize: 19, maxWidth: '60ch', lineHeight: 1.6 }}>
-          Vitalis distils clinical trials, genomics, and the breakthroughs reshaping care — written by working researchers, for clinicians and the curious alike.
+          TechPulse covers the phones, apps, and gadgets that matter — with honest reviews and no sponsored opinions.
         </p>
         <div style={{ display: 'flex', gap: 40, marginTop: 48, flexWrap: 'wrap', borderTop: '1px solid var(--border)', paddingTop: 26 }}>
-          {[['2,400+','studies summarised'],['38','contributing researchers'],['weekly','evidence briefings'],['94%','reader satisfaction']].map(([n,l]) => (
+          {[['1,200+','reviews & guides'],['24','tech writers'],['daily','news updates'],['4.8★','reader rating']].map(([n,l]) => (
             <div key={l}>
               <div style={{ fontFamily: 'var(--font-display)', fontSize: 34 }}>{n}</div>
               <div className="faint" style={{ fontSize: 13 }}>{l}</div>
@@ -128,19 +126,24 @@ function Step0({ ready, onContinue }: { ready: boolean; onContinue: () => void }
         </div>
       </section>
 
-      {/* Featured */}
       <section className="wrap section" style={{ paddingTop: 40 }}>
         <div className="section-head">
-          <div><span className="eyebrow">Latest</span><h2 style={{ marginTop: 14 }}>This week in research</h2></div>
-          <p className="sub">New evidence and methodology deep-dives from the journals that matter.</p>
+          <div><span className="eyebrow">Latest</span><h2 style={{ marginTop: 14 }}>This week in mobile tech</h2></div>
+          <p className="sub">New phone reviews, software breakdowns, and what the specs actually mean for real users.</p>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1.85fr 1fr', gap: 28 }}>
-          <div className="card">
-            <div className="thumb tone-1 pat" style={{ aspectRatio: '16/10' }}><span className="cat">Endocrinology</span></div>
+        <div style={{ display: 'grid', gridTemplateColumns: '1.85fr 1fr', gap: 28, alignItems: 'start' }}>
+          <div className="card" style={{ cursor: 'default' }}>
+            <div className="thumb tone-1 pat" style={{ aspectRatio: '16/10' }}><span className="cat">Android</span></div>
             <div className="card-body" style={{ padding: '28px 30px 30px' }}>
-              <h3 className="card-title" style={{ fontSize: 34, lineHeight: 1.05 }}>Inside the trial that rewired first-line treatment for Type 1 diabetes</h3>
-              <p className="excerpt" style={{ fontSize: 16, marginTop: 12 }}>A teplizumab-led protocol delayed disease onset by a median of two years. We unpack the endpoints, the caveats, and what it changes at the bedside.</p>
-              <div className="card-meta"><span>Dr. Lena Okafor</span><span className="dot"></span><span>14 min read</span><span className="dot"></span><span>Jun 1, 2026</span></div>
+              <h3 className="card-title" style={{ fontSize: 34, lineHeight: 1.05 }}>
+                Android 16: the features that actually change how you use your phone
+              </h3>
+              <p className="excerpt" style={{ fontSize: 16, marginTop: 12 }}>
+                Google&apos;s biggest Android release in years landed this week. We tested every feature so you know which ones are worth caring about.
+              </p>
+              <div className="card-meta">
+                <span>Alex Chen</span><span className="dot"></span><span>12 min read</span><span className="dot"></span><span>Jun 1, 2026</span>
+              </div>
             </div>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
@@ -149,17 +152,16 @@ function Step0({ ready, onContinue }: { ready: boolean; onContinue: () => void }
         </div>
       </section>
 
-      {/* Grid */}
       <section className="wrap" style={{ paddingBottom: 20 }}>
         <div className="grid-3">
           {[
-            { slug:'s2', tone:2, cat:'Neuroscience', title:'The gut–brain axis: what 1,200 patients taught us about mood', excerpt:'A landmark microbiome cohort links specific bacterial strains to depressive symptoms.', author:'Dr. Marcus Reyes', read:'9 min' },
-            { slug:'s3', tone:4, cat:'Cardiology', title:'Reading the new GLP-1 cardiovascular outcomes data', excerpt:'Beyond weight loss: a 17% reduction in major adverse events, and why dosing matters.', author:'Dr. Priya Nandakumar', read:'11 min' },
-            { slug:'s4', tone:3, cat:'Clinical Trials', title:"Why most Phase II oncology trials stall — and what's changing", excerpt:'Adaptive designs and biomarker stratification are quietly improving the odds.', author:'Dr. Sofia Haddad', read:'13 min' },
-            { slug:'s5', tone:6, cat:'Neurology', title:'Sleep debt and amyloid: a seven-year cohort, revisited', excerpt:'Chronic short sleep tracks with faster amyloid accumulation — but causation stays slippery.', author:'Dr. Ian Whitfield', read:'8 min' },
-            { slug:'s6', tone:5, cat:'Immunology', title:'mRNA platforms after COVID: the next therapeutic decade', excerpt:'From oncology vaccines to autoimmune tolerance, the pipeline is broader than you think.', author:'Dr. Lena Okafor', read:'10 min' },
+            { tone:2, cat:'Smartphones', title:'Galaxy S25 Ultra: two months, one camera, no going back', excerpt:'Samsung\'s best phone ever? After two months of daily use, here\'s our verdict.', author:'Sarah Kim', read:'15 min' },
+            { tone:4, cat:'Reviews', title:'iPhone 17 vs Pixel 9 Pro: camera shootout that settles the debate', excerpt:'400 photos across 3 countries. The results might surprise you.', author:'Marcus Webb', read:'11 min' },
+            { tone:3, cat:'Android', title:'Best budget Android phones under $200 in 2026', excerpt:'You don\'t need to spend $1,000 for a great Android experience.', author:'Priya Sharma', read:'9 min' },
+            { tone:6, cat:'How-To', title:'Why your phone battery dies fast — and exactly how to fix it', excerpt:'Most battery drain issues come from 4 common mistakes. This guide fixes all of them.', author:'Alex Chen', read:'8 min' },
+            { tone:5, cat:'AI & Mobile', title:'ChatGPT on mobile: the power features 90% of users never find', excerpt:'Hidden shortcuts, voice tricks, and workflow tips that make the app actually useful.', author:'Priya Sharma', read:'10 min' },
           ].map((p) => (
-            <div key={p.slug} className="card" style={{ cursor: 'default' }}>
+            <div key={p.title} className="card" style={{ cursor: 'default' }}>
               <div className={`thumb tone-${p.tone} pat`}><span className="cat">{p.cat}</span></div>
               <div className="card-body">
                 <h3 className="card-title">{p.title}</h3>
@@ -176,11 +178,10 @@ function Step0({ ready, onContinue }: { ready: boolean; onContinue: () => void }
         <AdSlot size="large" id="w0-mid" />
       </div>
 
-      {/* Trending topics */}
       <section className="wrap section">
-        <div className="section-head"><div><span className="eyebrow">Browse by field</span><h2 style={{ marginTop: 14 }}>What researchers are reading</h2></div></div>
+        <div className="section-head"><div><span className="eyebrow">Browse by category</span><h2 style={{ marginTop: 14 }}>Find what you&apos;re looking for</h2></div></div>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginTop: 8 }}>
-          {[['Cardiology',312],['Neuroscience',287],['Oncology',261],['Genomics',198],['Immunology',175],['Endocrinology',154],['Clinical Trials',143],['Public Health',129],['Psychiatry',118],['Infectious Disease',97],['Rheumatology',84],['Pediatrics',72]].map(([label, count]) => (
+          {[['Android',318],['iOS',274],['Smartphones',261],['Reviews',198],['Apps & Software',175],['How-To',154],['Wearables',143],['Gaming',129],['Cybersecurity',118],['AI & Mobile',97],['Tablets',84],['Accessories',72]].map(([label, count]) => (
             <span key={label} className="tag" style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 18px', fontSize: 14 }}>
               {label}<span className="faint" style={{ fontSize: 12 }}>{count}</span>
             </span>
@@ -188,13 +189,12 @@ function Step0({ ready, onContinue }: { ready: boolean; onContinue: () => void }
         </div>
       </section>
 
-      {/* Deep reads */}
       <section className="wrap section">
-        <div className="section-head"><div><span className="eyebrow">Deep reads</span><h2 style={{ marginTop: 14 }}>Long-form analysis worth your time</h2></div></div>
+        <div className="section-head"><div><span className="eyebrow">Deep dives</span><h2 style={{ marginTop: 14 }}>Long-form guides worth bookmarking</h2></div></div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
           {[
-            { tone:2, cat:'Public Health', title:'What 40,000 wearables revealed about heat and hospital visits', excerpt:'A continental dataset turns anecdote into signal: heat thresholds that predict ER load weeks in advance.', author:'Dr. Marcus Reyes', read:'7 min', date:'May 9, 2026' },
-            { tone:3, cat:'Genomics', title:'CRISPR in the clinic: what the first 200 treated patients show us', excerpt:'Early gene-editing trials for sickle cell and beta-thalassemia are yielding durable responses.', author:'Dr. Sofia Haddad', read:'16 min', date:'May 5, 2026' },
+            { tone:2, cat:'Wearables', title:'Smartwatches in 2026: we tested every major model — here\'s who wins', excerpt:'Battery life, health tracking accuracy, and app support compared across 8 devices over 6 weeks.', author:'Zara Ahmed', read:'16 min', date:'May 9, 2026' },
+            { tone:3, cat:'Cybersecurity', title:'How to spot and remove Android malware before it steals your data', excerpt:'Signs your phone is infected, tools to clean it, and habits to never get hit again.', author:'James Carter', read:'13 min', date:'May 5, 2026' },
           ].map((p) => (
             <div key={p.title} className="card" style={{ cursor: 'default' }}>
               <div className={`thumb tone-${p.tone} pat`} style={{ aspectRatio: '16/9' }}><span className="cat">{p.cat}</span></div>
@@ -214,16 +214,15 @@ function Step0({ ready, onContinue }: { ready: boolean; onContinue: () => void }
         </div>
       </div>
 
-      {/* Most read */}
       <section className="wrap section">
         <div className="section-head"><div><span className="eyebrow">Popular</span><h2 style={{ marginTop: 14 }}>Most read this month</h2></div></div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
           {[
-            { n:'01', cat:'Cardiology', title:'Reading the new GLP-1 cardiovascular outcomes data', author:'Dr. Priya Nandakumar', read:'11 min' },
-            { n:'02', cat:'Endocrinology', title:'Inside the trial that rewired first-line treatment for Type 1 diabetes', author:'Dr. Lena Okafor', read:'14 min' },
-            { n:'03', cat:'Neuroscience', title:'The gut–brain axis: what 1,200 patients taught us about mood', author:'Dr. Marcus Reyes', read:'9 min' },
-            { n:'04', cat:'Immunology', title:'mRNA platforms after COVID: the next therapeutic decade', author:'Dr. Lena Okafor', read:'10 min' },
-            { n:'05', cat:'Genomics', title:'CRISPR in the clinic: what the first 200 treated patients show us', author:'Dr. Sofia Haddad', read:'16 min' },
+            { n:'01', cat:'Smartphones', title:'Galaxy S25 Ultra: two months, one camera, no going back', author:'Sarah Kim', read:'15 min' },
+            { n:'02', cat:'Android', title:'Android 16: the features that actually change how you use your phone', author:'Alex Chen', read:'12 min' },
+            { n:'03', cat:'Android', title:'Best budget Android phones under $200 in 2026', author:'Priya Sharma', read:'9 min' },
+            { n:'04', cat:'How-To', title:'Why your phone battery dies fast — and exactly how to fix it', author:'Alex Chen', read:'8 min' },
+            { n:'05', cat:'Smartphones', title:'Foldable phones in 2026: we tested them all', author:'Marcus Webb', read:'11 min' },
           ].map((item) => (
             <div key={item.n} style={{ display: 'grid', gridTemplateColumns: '48px 1fr auto', gap: 20, alignItems: 'center', padding: '20px 0', borderBottom: '1px solid var(--border)' }}>
               <span style={{ fontFamily: 'var(--font-display)', fontSize: 28, color: 'var(--muted)', lineHeight: 1 }}>{item.n}</span>
@@ -247,7 +246,7 @@ function Step0({ ready, onContinue }: { ready: boolean; onContinue: () => void }
   );
 }
 
-// ── Step 1: Research (full length) ────────────────────────────────────────────
+// ── Step 1: Reviews ───────────────────────────────────────────────────────────
 function Step1({ ready, onContinue }: { ready: boolean; onContinue: () => void }) {
   return (
     <>
@@ -256,10 +255,10 @@ function Step1({ ready, onContinue }: { ready: boolean; onContinue: () => void }
       </div>
 
       <section className="wrap" style={{ padding: '48px 28px 24px' }}>
-        <span className="eyebrow">Research</span>
-        <h1 style={{ fontSize: 'clamp(40px,6vw,72px)', maxWidth: '18ch', margin: '18px 0 18px' }}>Recent findings from the journals</h1>
+        <span className="eyebrow">Reviews</span>
+        <h1 style={{ fontSize: 'clamp(40px,6vw,72px)', maxWidth: '18ch', margin: '18px 0 18px' }}>All reviews, tested and ranked</h1>
         <p className="muted" style={{ fontSize: 18, maxWidth: '58ch', lineHeight: 1.65 }}>
-          Every summary here started as a primary paper. Our researchers read it, checked it, and cut it down to what actually matters.
+          Every device we review is purchased independently and tested for at least two weeks before we write a single word.
         </p>
       </section>
 
@@ -267,20 +266,20 @@ function Step1({ ready, onContinue }: { ready: boolean; onContinue: () => void }
         <div className="with-side">
           <div>
             {[
-              { tone:1, cat:'Endocrinology', title:'Inside the trial that rewired first-line treatment for Type 1 diabetes', excerpt:'A teplizumab-led protocol delayed disease onset by a median of two years — we unpack the endpoints and the caveats.', author:'Dr. Lena Okafor', read:'14 min', date:'Jun 1, 2026' },
-              { tone:2, cat:'Neuroscience', title:'The gut–brain axis: what 1,200 patients taught us about mood', excerpt:'A landmark microbiome cohort links specific bacterial strains to depressive symptoms.', author:'Dr. Marcus Reyes', read:'9 min', date:'May 28, 2026' },
-              { tone:4, cat:'Cardiology', title:'Reading the new GLP-1 cardiovascular outcomes data', excerpt:'Beyond weight loss: a 17% reduction in major adverse events, and why dosing matters.', author:'Dr. Priya Nandakumar', read:'11 min', date:'May 24, 2026' },
-              { tone:3, cat:'Clinical Trials', title:"Why most Phase II oncology trials stall — and what's changing", excerpt:'Adaptive designs and biomarker stratification are quietly improving the odds.', author:'Dr. Sofia Haddad', read:'13 min', date:'May 20, 2026' },
-              { tone:6, cat:'Neurology', title:'Sleep debt and amyloid: a seven-year cohort, revisited', excerpt:'Chronic short sleep tracks with faster amyloid accumulation — but causation stays slippery.', author:'Dr. Ian Whitfield', read:'8 min', date:'May 17, 2026' },
-              { tone:5, cat:'Immunology', title:'mRNA platforms after COVID: the next therapeutic decade', excerpt:'From oncology vaccines to autoimmune tolerance, the pipeline is broader than you think.', author:'Dr. Lena Okafor', read:'10 min', date:'May 13, 2026' },
-              { tone:2, cat:'Public Health', title:'What 40,000 wearables revealed about heat and hospital visits', excerpt:'A continental dataset turns anecdote into signal: heat thresholds that predict ER load.', author:'Dr. Marcus Reyes', read:'7 min', date:'May 9, 2026' },
-              { tone:3, cat:'Genomics', title:'CRISPR in the clinic: what the first 200 treated patients show us', excerpt:'Early gene-editing trials for sickle cell and beta-thalassemia are yielding durable responses.', author:'Dr. Sofia Haddad', read:'16 min', date:'May 5, 2026' },
-              { tone:1, cat:'Psychiatry', title:'Ketamine for depression: separating the signal from the noise', excerpt:'Rapid antidepressant effects are real — but patient selection and dosing protocols remain contested.', author:'Dr. Ian Whitfield', read:'12 min', date:'Apr 30, 2026' },
-              { tone:4, cat:'Infectious Disease', title:'Antimicrobial resistance: the slow pandemic reshaping surgery', excerpt:'Drug-resistant organisms are quietly changing what procedures we can safely perform.', author:'Dr. Priya Nandakumar', read:'10 min', date:'Apr 25, 2026' },
-              { tone:5, cat:'Oncology', title:'CAR-T at five years: what the long-term remission data finally tells us', excerpt:'Durable responses in diffuse large B-cell lymphoma point toward a genuine cure for a subset.', author:'Dr. Sofia Haddad', read:'14 min', date:'Apr 20, 2026' },
-              { tone:4, cat:'Cardiology', title:"The blood pressure paradox: why treating to target isn't always enough", excerpt:'New meta-analysis of 180,000 patients challenges the assumption that lower is always better.', author:'Dr. Priya Nandakumar', read:'9 min', date:'Apr 15, 2026' },
-              { tone:2, cat:'Genomics', title:'Polygenic risk scores: closer to the clinic than you think', excerpt:'Multi-ancestry validation data suggests PRS-guided screening could reshape preventive cardiology.', author:'Dr. Marcus Reyes', read:'11 min', date:'Apr 10, 2026' },
-              { tone:6, cat:'Immunology', title:'Autoimmunity after COVID: the emerging long-haul immune picture', excerpt:'Persistent dysregulation in B and T cell populations is reshaping how we think about post-viral syndromes.', author:'Dr. Lena Okafor', read:'13 min', date:'Apr 5, 2026' },
+              { tone:1, cat:'Android', title:'Android 16: the features that actually change how you use your phone', excerpt:'Google\'s biggest Android release in years. We tested every new feature across three weeks of daily use.', author:'Alex Chen', read:'12 min', date:'Jun 1, 2026' },
+              { tone:2, cat:'Smartphones', title:'Galaxy S25 Ultra review: two months, one camera, no going back', excerpt:'After eight weeks of daily photography and demanding workloads, Samsung\'s Ultra still sets the benchmark.', author:'Sarah Kim', read:'15 min', date:'May 28, 2026' },
+              { tone:4, cat:'Reviews', title:'iPhone 17 vs Pixel 9 Pro: the camera shootout that settles the debate', excerpt:'400 photos, six lighting conditions, three countries. One camera wins — and it\'s not the one everyone expected.', author:'Marcus Webb', read:'11 min', date:'May 24, 2026' },
+              { tone:3, cat:'Android', title:'Best budget Android phones under $200 in 2026', excerpt:'Great Android experiences no longer require a four-figure budget. These six phones prove the sub-$200 category has never been stronger.', author:'Priya Sharma', read:'9 min', date:'May 20, 2026' },
+              { tone:6, cat:'How-To', title:'Why your phone battery dies fast — and exactly how to fix it', excerpt:'Most battery drain problems trace back to four very fixable habits. Every setting, every app, every charging mistake covered.', author:'Alex Chen', read:'8 min', date:'May 17, 2026' },
+              { tone:5, cat:'AI & Mobile', title:'ChatGPT on mobile: the power features 90% of users never find', excerpt:'Hidden voice shortcuts, custom instructions, memory controls, and workflow hacks that make the app actually useful.', author:'Priya Sharma', read:'10 min', date:'May 13, 2026' },
+              { tone:2, cat:'Wearables', title:'Smartwatches in 2026: we tested every major model — here\'s who wins', excerpt:'Eight weeks. Six watches. Battery life is still the dealbreaker no spec sheet can hide. Here\'s which watch lasted.', author:'Zara Ahmed', read:'16 min', date:'May 9, 2026' },
+              { tone:3, cat:'Cybersecurity', title:'How to spot and remove Android malware before it steals your data', excerpt:'Signs of infection, tools to clean your device, and the exact habits that prevent reinfection.', author:'James Carter', read:'13 min', date:'May 5, 2026' },
+              { tone:1, cat:'Reviews', title:'OnePlus 13 camera deep-dive: flagship quality at half the price', excerpt:'OnePlus under-promises and over-delivers again. The 13 is their best camera yet — $300 less than the phones it beats.', author:'Sarah Kim', read:'14 min', date:'Apr 30, 2026' },
+              { tone:4, cat:'Smartphones', title:'5G speeds decoded: what the numbers on your plan actually mean', excerpt:'Sub-6GHz, mmWave, and C-band explained without carrier marketing spin.', author:'Marcus Webb', read:'9 min', date:'Apr 25, 2026' },
+              { tone:5, cat:'Apps & Software', title:'50 best Android apps of 2026 — tested, ranked, and actually useful', excerpt:'200 apps tested. 50 survived our ruthless cut. No filler, no sponsored picks.', author:'Priya Sharma', read:'16 min', date:'Apr 20, 2026' },
+              { tone:6, cat:'How-To', title:'How to make any Android phone feel new again in 10 minutes', excerpt:'Animation settings, background limits, battery optimisation, and the developer option that transforms slow phones.', author:'Alex Chen', read:'8 min', date:'Apr 15, 2026' },
+              { tone:1, cat:'Smartphones', title:'Foldable phones in 2026: we tested them all — here\'s who should buy one', excerpt:'After a full year living with three foldables, we know exactly who they\'re for.', author:'Marcus Webb', read:'11 min', date:'Apr 10, 2026' },
+              { tone:3, cat:'iOS', title:'iOS 19 hidden features: 14 things Apple didn\'t announce on stage', excerpt:'Buried in the iOS 19 update are 14 genuinely useful features Apple never mentioned. Here\'s where to find them.', author:'Sarah Kim', read:'13 min', date:'Apr 5, 2026' },
             ].map((p, i) => (
               <div key={p.title}>
                 <div style={{ display: 'grid', gridTemplateColumns: '90px 1fr', gap: 20, padding: '22px 0', borderBottom: '1px solid var(--border)', alignItems: 'start' }}>
@@ -302,17 +301,17 @@ function Step1({ ready, onContinue }: { ready: boolean; onContinue: () => void }
           <aside className="sidebar">
             <AdSlot size="small" id="w1-side-1" label="Sidebar" />
             <div className="side-card">
-              <h4 style={{ fontSize: 16 }}>Browse by specialty</h4>
+              <h4 style={{ fontSize: 16 }}>Browse categories</h4>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 10 }}>
-                {['Cardiology','Neuroscience','Oncology','Immunology','Genomics','Public Health','Psychiatry','Infectious Disease'].map((t) => (
+                {['Android','iOS','Smartphones','Reviews','Apps','How-To','Wearables','Cybersecurity'].map((t) => (
                   <span key={t} className="tag" style={{ fontSize: 12, padding: '6px 12px' }}>{t}</span>
                 ))}
               </div>
             </div>
             <AdSlot size="small" id="w1-side-2" label="Sidebar" />
             <div className="side-card">
-              <h4 style={{ fontSize: 16 }}>About Vitalis</h4>
-              <p className="muted" style={{ fontSize: 13, lineHeight: 1.6, marginTop: 8 }}>Independent medical research journalism. Every brief is sourced from primary literature and reviewed by an active clinician.</p>
+              <h4 style={{ fontSize: 16 }}>About TechPulse</h4>
+              <p className="muted" style={{ fontSize: 13, lineHeight: 1.6, marginTop: 8 }}>Independent mobile and tech journalism. Every review starts with a device we bought ourselves.</p>
             </div>
             <AdSlot size="small" id="w1-side-3" label="Sidebar" />
           </aside>
@@ -328,7 +327,7 @@ function Step1({ ready, onContinue }: { ready: boolean; onContinue: () => void }
   );
 }
 
-// ── Step 2: Latest Study (full article) ───────────────────────────────────────
+// ── Step 2: Latest ────────────────────────────────────────────────────────────
 function Step2({ ready, onContinue }: { ready: boolean; onContinue: () => void }) {
   return (
     <>
@@ -338,16 +337,16 @@ function Step2({ ready, onContinue }: { ready: boolean; onContinue: () => void }
 
       <section className="wrap" style={{ padding: '36px 28px 0' }}>
         <div style={{ maxWidth: 760 }}>
-          <span className="eyebrow">Endocrinology · Clinical Trials</span>
+          <span className="eyebrow">Android · Software</span>
           <h1 style={{ fontSize: 'clamp(36px,5.4vw,60px)', margin: '18px 0 22px', lineHeight: 1.04 }}>
-            Inside the trial that rewired first-line treatment for Type 1 diabetes
+            Android 16: the features that actually change how you use your phone
           </h1>
           <div style={{ display: 'flex', alignItems: 'center', gap: 14, flexWrap: 'wrap', color: 'var(--muted)', fontSize: 14.5 }}>
             <span style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
               <span style={{ width: 38, height: 38, borderRadius: '50%', background: 'linear-gradient(135deg,var(--accent),#2a1758)', display: 'inline-block' }}></span>
-              <b style={{ color: 'var(--text)', fontWeight: 600 }}>Dr. Lena Okafor</b>
+              <b style={{ color: 'var(--text)', fontWeight: 600 }}>Alex Chen</b>
             </span>
-            <span className="dot"></span><span>14 min read</span>
+            <span className="dot"></span><span>12 min read</span>
             <span className="dot"></span><span>June 1, 2026</span>
           </div>
         </div>
@@ -357,60 +356,72 @@ function Step2({ ready, onContinue }: { ready: boolean; onContinue: () => void }
         <div className="with-side">
           <article className="article" style={{ maxWidth: 760 }}>
             <figure style={{ marginTop: 0 }}>
-              <div className="fig-ph thumb tone-1 pat" style={{ height: 380 }}></div>
-              <figcaption>Islet autoimmunity progression in at-risk cohorts. Illustrative.</figcaption>
+              <div className="fig-ph thumb tone-1 pat" style={{ height: 320 }}></div>
+              <figcaption>Android 16 running on a Pixel 9 Pro. Photo: TechPulse / Alex Chen.</figcaption>
             </figure>
-            <p>For three decades, a Type 1 diabetes diagnosis arrived with the same blunt prescription: lifelong insulin, beginning the day the beta cells gave out. The TN-10 follow-up data, presented this spring, is the first hard evidence that the timeline itself is negotiable.</p>
-            <p>In a cohort of relatives with two or more islet autoantibodies — people at high risk but not yet symptomatic — a 14-day course of teplizumab delayed the onset of clinical disease by a median of roughly two years versus placebo. For a teenager, that is two more years of working pancreatic function, and two more years before the daily arithmetic of insulin begins.</p>
-            <h2>What the trial actually measured</h2>
-            <p>The primary endpoint was time to clinical diagnosis, defined by standard glucose-tolerance thresholds. Crucially, the trial enrolled on the basis of immune markers, not symptoms — a design choice that let investigators intervene during the silent, pre-clinical window when beta-cell mass is declining but not yet gone.</p>
-            <p>That window is the whole story. Teplizumab is an anti-CD3 monoclonal antibody; it blunts the autoreactive T cells doing the damage. Hit those cells early enough and you preserve function that, post-diagnosis, is already lost.</p>
+            <p>Every major Android release arrives with a list of features that reads like a marketing brief. Most land as minor tweaks dressed up as revolutions. A few genuinely change the way the phone feels to use — and Android 16 has more of the latter than we&apos;ve seen in years.</p>
+            <p>We spent three weeks running Android 16 across four devices — a Pixel 9 Pro, a Galaxy S25, a mid-range Motorola, and an older OnePlus — to find out which features survive contact with real-world use and which ones vanish into the settings menu within 48 hours.</p>
+
+            <h2>The new notification system</h2>
+            <p>Android&apos;s notification system has needed a serious rethink for years, and Google has finally delivered one. The new Adaptive Notifications layer uses on-device AI to group, prioritise, and silently log low-priority alerts instead of interrupting you with them.</p>
+            <p>In practice, the difference is dramatic. After training for about a week, the system correctly identified 84% of the alerts we&apos;d have swiped away anyway and handled them silently. The remaining 16% — mostly banking and security notifications — came through normally.</p>
+
             <div className="ad-zone ad-300-wrap" style={{ padding: '8px 0' }}>
-              <AdSlot size="small" id="w2-content-1" label="In-content" style={{ height: 'auto', minHeight: 160 }} />
+              <AdSlot size="small" id="w2-c1" label="In-content" style={{ height: 'auto', minHeight: 160 }} />
             </div>
-            <h2>The two-year signal, in context</h2>
-            <p>Two years is not a cure, and the authors are careful not to frame it as one. But in a disease where progression has felt inexorable, a durable delay reshapes the conversation — about screening, about when to treat, and about what &quot;first-line&quot; even means.</p>
-            <blockquote>&quot;We&apos;ve spent forty years managing the consequences. This is the first time we&apos;ve meaningfully changed the slope of the curve before symptoms appear.&quot;</blockquote>
-            <p>The effect was not uniform. Responders tended to be younger and to carry a specific HLA profile, hinting that the future of the therapy is stratified rather than universal.</p>
+
+            <h2>Battery intelligence, finally done right</h2>
+            <p>Google has been promising smarter charging for three releases. Android 16 is the first version where it actually works. The Adaptive Charging engine now learns your specific schedule and adjusts charge rates accordingly.</p>
+            <p>If you consistently plug in at midnight and unplug at 7am, it charges to 80% quickly, holds there, then fills the last 20% between 5:30 and 6:45am. This keeps the battery at lower charge states for most of the night, meaningfully extending long-term battery health.</p>
+            <p>Over our three-week test, the system predicted our morning unplug time correctly 91% of the time.</p>
+
+            <blockquote>&ldquo;Android 16 feels like the first release in a long time where the features they announced are the ones you&apos;ll actually use.&rdquo;</blockquote>
+
             <div className="ad-zone ad-300-wrap" style={{ padding: '8px 0' }}>
-              <AdSlot size="small" id="w2-content-2" label="In-content" style={{ height: 'auto', minHeight: 160 }} />
+              <AdSlot size="small" id="w2-c2" label="In-content" style={{ height: 'auto', minHeight: 160 }} />
             </div>
             <div className="ad-zone" style={{ padding: '18px 0' }}>
               <AdSlot size="large" id="w2-mid" label="In-article Billboard" />
             </div>
-            <h2>Caveats worth keeping</h2>
-            <p>Enthusiasm should be measured against the trial&apos;s real limits:</p>
-            <ul>
-              <li><b>Small, enriched cohort.</b> Participants were autoantibody-positive relatives — not the general population — so screening logistics remain unsolved.</li>
-              <li><b>Transient side effects.</b> A predictable lymphopenia and rash followed dosing; manageable, but not nothing in otherwise-healthy adolescents.</li>
-              <li><b>Durability unknown past the window.</b> We have years, not decades, of follow-up. Whether the delay compounds or simply shifts the timeline is the open question.</li>
-            </ul>
+
+            <h2>Privacy controls get a proper overhaul</h2>
+            <p>The new Privacy Hub consolidates all permission controls into one dashboard with timeline graphs showing exactly which app accessed what and when. More importantly, there are now two new permission tiers: Temporary Access and Background Watch.</p>
+            <p>The Background Watch feature caught one of our test apps accessing the microphone during idle time. We deleted it immediately.</p>
+
             <div className="ad-zone ad-300-wrap" style={{ padding: '8px 0' }}>
-              <AdSlot size="small" id="w2-content-3" label="In-content" style={{ height: 'auto', minHeight: 160 }} />
+              <AdSlot size="small" id="w2-c3" label="In-content" style={{ height: 'auto', minHeight: 160 }} />
             </div>
-            <h2>What it changes at the bedside</h2>
-            <p>The practical shift is upstream. If a two-week course can buy years, the value of identifying at-risk individuals before symptoms — through family history and autoantibody panels — rises sharply. Several pediatric centres are already piloting targeted screening in first-degree relatives.</p>
-            <p>None of this replaces insulin for those already diagnosed. But for the first time, the standard of care has a plausible &quot;before&quot; — a stage at which we intervene to protect function rather than merely replace it.</p>
+
+            <h2>Live Captions now translate in real time</h2>
+            <p>Live Captions — Google&apos;s on-device real-time transcription — has been upgraded with speaker identification and real-time translation. The translation is handled entirely on-device with no network round-trip. Quality is good enough for casual conversation across the languages we tested.</p>
+
+            <h2>UI changes: subtle but consistent</h2>
+            <p>The visual refresh in Android 16 isn&apos;t dramatic — it&apos;s the kind of polish you notice after a week rather than in the first five minutes. Corner radii are slightly larger, animations are more fluid, and the Quick Settings panel has been reorganised. The lock screen gets the most noticeable treatment with new customisation options built in.</p>
+
             <div className="ad-zone ad-300-wrap" style={{ padding: '8px 0' }}>
-              <AdSlot size="small" id="w2-content-4" label="In-content" style={{ height: 'auto', minHeight: 160 }} />
+              <AdSlot size="small" id="w2-c4" label="In-content" style={{ height: 'auto', minHeight: 160 }} />
             </div>
-            <div className="side-card" style={{ marginTop: 8, display: 'flex', gap: 18, alignItems: 'flex-start' }}>
+
+            <h2>The verdict</h2>
+            <p>Android 16 is the first Android release in three years where we would recommend updating immediately rather than waiting. The notification intelligence, battery management improvements, and privacy overhaul are all genuinely useful — not features that sound good in a press release but disappear into noise.</p>
+            <p>Pixels benefit first. If you&apos;re on a Pixel 7 or later, update now. If you&apos;re on Samsung, the One UI 8 rollout is clean. If you&apos;re on a mid-range device from a smaller manufacturer, wait two to three weeks.</p>
+
+            <div className="side-card" style={{ marginTop: 24, display: 'flex', gap: 18, alignItems: 'flex-start' }}>
               <span style={{ width: 54, height: 54, flex: 'none', borderRadius: '50%', background: 'linear-gradient(135deg,var(--accent),#2a1758)' }}></span>
               <div>
-                <h4 style={{ fontFamily: 'var(--font-display)', fontSize: 21, marginBottom: 4 }}>Dr. Lena Okafor</h4>
-                <p className="muted" style={{ fontSize: 14 }}>Endocrinologist and contributing editor at Vitalis. Writes on metabolic disease, trial design, and the gap between evidence and practice.</p>
+                <h4 style={{ fontFamily: 'var(--font-display)', fontSize: 21, marginBottom: 4 }}>Alex Chen</h4>
+                <p className="muted" style={{ fontSize: 14 }}>Senior editor, Android & Software at TechPulse. Covering Android since the Nexus era.</p>
               </div>
             </div>
           </article>
           <aside className="sidebar">
             <AdSlot size="small" id="w2-side-1" label="Sidebar" />
             <div className="side-card">
-              <h4 style={{ fontSize: 16 }}>In this article</h4>
+              <h4 style={{ fontSize: 16 }}>In this review</h4>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 9, marginTop: 10, fontSize: 14 }}>
-                <span className="muted">What the trial measured</span>
-                <span className="muted">The two-year signal</span>
-                <span className="muted">Caveats worth keeping</span>
-                <span className="muted">What it changes at the bedside</span>
+                {['Notification system','Battery intelligence','Privacy controls','Live Captions','UI changes','The verdict'].map(s => (
+                  <span key={s} className="muted">{s}</span>
+                ))}
               </div>
             </div>
             <AdSlot size="small" id="w2-side-2" label="Sidebar" />
@@ -420,14 +431,13 @@ function Step2({ ready, onContinue }: { ready: boolean; onContinue: () => void }
         </div>
       </section>
 
-      {/* Related */}
       <section className="wrap section">
         <div className="section-head"><h2>Keep reading</h2></div>
         <div className="grid-3">
           {[
-            { tone:2, cat:'Neuroscience', title:'The gut–brain axis: what 1,200 patients taught us', author:'Dr. Marcus Reyes', read:'9 min' },
-            { tone:4, cat:'Cardiology', title:'Reading the new GLP-1 cardiovascular outcomes data', author:'Dr. Priya Nandakumar', read:'11 min' },
-            { tone:5, cat:'Immunology', title:'mRNA platforms after COVID: the next therapeutic decade', author:'Dr. Lena Okafor', read:'10 min' },
+            { tone:2, cat:'Smartphones', title:'Galaxy S25 Ultra: two months of real use', author:'Sarah Kim', read:'15 min' },
+            { tone:4, cat:'Reviews', title:'iPhone 17 vs Pixel 9 Pro: the camera shootout', author:'Marcus Webb', read:'11 min' },
+            { tone:5, cat:'AI & Mobile', title:'ChatGPT on mobile: the power features you\'re missing', author:'Priya Sharma', read:'10 min' },
           ].map((r) => (
             <div key={r.title} className="card" style={{ cursor: 'default' }}>
               <div className={`thumb tone-${r.tone} pat`}><span className="cat">{r.cat}</span></div>
@@ -485,10 +495,10 @@ function Step3({ ready, onContinue }: { ready: boolean; onContinue: () => void }
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 20 }}>
           {[
             { icon:'🎬', title:'Any format', desc:'MP4, MKV, AVI, and more — NovaPlex handles them all without converting.' },
-            { icon:'📱', title:'Mobile-first', desc:'Built for Android with a clean, touch-friendly interface optimised for one-handed use.' },
+            { icon:'📱', title:'Mobile-first', desc:'Built for Android with a clean, touch-friendly interface for one-handed use.' },
             { icon:'🔒', title:'Private', desc:'No account needed. Your watch history stays on your device.' },
             { icon:'⚡', title:'Fast start', desc:'Videos begin playing in under a second, even on slow connections.' },
-            { icon:'🎧', title:'Audio tracks', desc:'Switch between multiple audio languages without restarting.' },
+            { icon:'🎧', title:'Audio tracks', desc:'Switch between multiple audio languages without restarting the video.' },
             { icon:'📺', title:'Cast support', desc:'Send to your TV with Google Cast, no extra app required.' },
           ].map((f) => (
             <div key={f.title} className="side-card" style={{ textAlign: 'center', padding: '28px 20px' }}>

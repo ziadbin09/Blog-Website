@@ -1,161 +1,80 @@
 'use client';
 
-import AdSlot from '@/components/AdSlot';
 import Link from 'next/link';
 import { useState } from 'react';
+import AdSlot from '@/components/AdSlot';
 
-type Post = {
-  slug: string;
-  cat: string;
-  tone: number;
-  title: string;
-  excerpt: string;
-  author: string;
-  read: string;
-  date: string;
-};
+const CATS = ['all','Android','iOS','Smartphones','Reviews','Apps & Software','How-To','Wearables','Gaming','Cybersecurity','AI & Mobile'];
 
-const POSTS: Post[] = [
-  { slug: 'first-post', cat: 'Endocrinology', tone: 1, title: 'Inside the trial that rewired first-line treatment for Type 1 diabetes', excerpt: 'A teplizumab-led protocol delayed disease onset by a median of two years — we unpack the endpoints and the caveats.', author: 'Dr. Lena Okafor', read: '14 min', date: 'Jun 1, 2026' },
-  { slug: 'second-post', cat: 'Neuroscience', tone: 2, title: 'The gut–brain axis: what 1,200 patients taught us about mood', excerpt: 'A landmark microbiome cohort links specific bacterial strains to depressive symptoms.', author: 'Dr. Marcus Reyes', read: '9 min', date: 'May 28, 2026' },
-  { slug: 'third-post', cat: 'Cardiology', tone: 4, title: 'Reading the new GLP-1 cardiovascular outcomes data', excerpt: 'Beyond weight loss: a 17% reduction in major adverse events, and why dosing matters.', author: 'Dr. Priya Nandakumar', read: '11 min', date: 'May 24, 2026' },
-  { slug: 'fourth-post', cat: 'Clinical Trials', tone: 3, title: "Why most Phase II oncology trials stall — and what's changing", excerpt: 'Adaptive designs and biomarker stratification are quietly improving the odds.', author: 'Dr. Sofia Haddad', read: '13 min', date: 'May 20, 2026' },
-  { slug: 'fifth-post', cat: 'Neuroscience', tone: 6, title: 'Sleep debt and amyloid: a seven-year cohort, revisited', excerpt: 'Chronic short sleep tracks with faster amyloid accumulation — but causation stays slippery.', author: 'Dr. Ian Whitfield', read: '8 min', date: 'May 17, 2026' },
-  { slug: 'sixth-post', cat: 'Immunology', tone: 5, title: 'mRNA platforms after COVID: the next therapeutic decade', excerpt: 'From oncology vaccines to autoimmune tolerance, the pipeline is broader than you think.', author: 'Dr. Lena Okafor', read: '10 min', date: 'May 13, 2026' },
-  { slug: 'seventh-post', cat: 'Public Health', tone: 2, title: 'What 40,000 wearables revealed about heat and hospital visits', excerpt: 'A continental dataset turns anecdote into signal: heat thresholds that predict ER load.', author: 'Dr. Marcus Reyes', read: '7 min', date: 'May 9, 2026' },
-  { slug: 'eighth-post', cat: 'Genomics', tone: 3, title: 'CRISPR in the clinic: what the first 200 treated patients show us', excerpt: 'Early gene-editing trials for sickle cell and beta-thalassemia are yielding durable responses — and raising new questions about access.', author: 'Dr. Sofia Haddad', read: '16 min', date: 'May 5, 2026' },
-  { slug: 'ninth-post', cat: 'Psychiatry', tone: 1, title: 'Ketamine for depression: separating the signal from the noise', excerpt: 'Rapid antidepressant effects are real — but patient selection and dosing protocols remain deeply contested.', author: 'Dr. Ian Whitfield', read: '12 min', date: 'Apr 30, 2026' },
-  { slug: 'tenth-post', cat: 'Infectious Disease', tone: 4, title: 'Antimicrobial resistance: the slow pandemic reshaping surgery', excerpt: 'Drug-resistant organisms are quietly changing what procedures we can safely perform — and on whom.', author: 'Dr. Priya Nandakumar', read: '10 min', date: 'Apr 25, 2026' },
-  { slug: 'eleventh-post', cat: 'Oncology', tone: 5, title: 'CAR-T at five years: what the long-term remission data finally tells us', excerpt: 'Durable responses in diffuse large B-cell lymphoma point toward a genuine cure for a subset of patients.', author: 'Dr. Sofia Haddad', read: '14 min', date: 'Apr 20, 2026' },
-  { slug: 'twelfth-post', cat: 'Cardiology', tone: 4, title: 'The blood pressure paradox: why treating to target isn\'t always enough', excerpt: 'New meta-analysis of 180,000 patients challenges the assumption that lower is always better.', author: 'Dr. Priya Nandakumar', read: '9 min', date: 'Apr 15, 2026' },
-  { slug: 'thirteenth-post', cat: 'Genomics', tone: 2, title: 'Polygenic risk scores: closer to the clinic than you think', excerpt: 'Multi-ancestry validation data suggests PRS-guided screening could reshape preventive cardiology within the decade.', author: 'Dr. Marcus Reyes', read: '11 min', date: 'Apr 10, 2026' },
-  { slug: 'fourteenth-post', cat: 'Immunology', tone: 6, title: 'Autoimmunity after COVID: the emerging long-haul immune picture', excerpt: 'Persistent dysregulation in B and T cell populations is reshaping how we think about post-viral syndromes.', author: 'Dr. Lena Okafor', read: '13 min', date: 'Apr 5, 2026' },
+const POSTS = [
+  { slug:'android-16-features', cat:'Android', tone:1, title:'Android 16: the features that actually change how you use your phone', excerpt:'Google\'s biggest Android release in years landed this week. We tested every new feature across three weeks of daily use to find out which ones matter.', author:'Alex Chen', read:'12 min', date:'Jun 1, 2026' },
+  { slug:'galaxy-s25-ultra-review', cat:'Smartphones', tone:2, title:'Galaxy S25 Ultra review: two months, one camera, no going back', excerpt:'After eight weeks of daily photography and demanding workloads, Samsung\'s Ultra still sets the bar every other Android phone has to clear.', author:'Sarah Kim', read:'15 min', date:'May 28, 2026' },
+  { slug:'iphone-17-vs-pixel-9', cat:'Reviews', tone:4, title:'iPhone 17 vs Pixel 9 Pro: the camera shootout that settles the debate', excerpt:'We shot 400 photos in six different lighting conditions across three countries. One camera is clearly better — and it\'s not the one everyone expected.', author:'Marcus Webb', read:'11 min', date:'May 24, 2026' },
+  { slug:'best-budget-android-2026', cat:'Android', tone:3, title:'Best budget Android phones under $200 in 2026', excerpt:'Great Android experiences no longer require a four-figure budget. These six phones prove the sub-$200 category has never been stronger.', author:'Priya Sharma', read:'9 min', date:'May 20, 2026' },
+  { slug:'smartphone-battery-fix', cat:'How-To', tone:6, title:'Why your phone battery dies fast — and exactly how to fix it', excerpt:'Most battery drain problems trace back to four very fixable habits. This step-by-step guide covers every setting, every app, and every charging mistake.', author:'Alex Chen', read:'8 min', date:'May 17, 2026' },
+  { slug:'chatgpt-mobile-tips', cat:'AI & Mobile', tone:5, title:'ChatGPT on mobile: the power features 90% of users never find', excerpt:'Hidden voice shortcuts, custom instructions, memory controls, and workflow hacks that turn ChatGPT from a chatbot into a daily productivity tool.', author:'Priya Sharma', read:'10 min', date:'May 13, 2026' },
+  { slug:'wearables-2026', cat:'Wearables', tone:2, title:'Smartwatches in 2026: we tested every major model — here\'s who wins', excerpt:'Eight weeks. Six watches. One conclusion: battery life is still the dealbreaker no spec sheet can hide. Here\'s which watch lasted, and which ones didn\'t.', author:'Zara Ahmed', read:'16 min', date:'May 9, 2026' },
+  { slug:'android-malware-guide', cat:'Cybersecurity', tone:3, title:'How to spot and remove Android malware before it steals your data', excerpt:'Signs of infection, tools to clean your device, and the exact settings and habits that prevent reinfection. Works on all Android phones.', author:'James Carter', read:'13 min', date:'May 5, 2026' },
+  { slug:'oneplus-13-camera', cat:'Reviews', tone:1, title:'OnePlus 13 camera deep-dive: flagship quality at half the price', excerpt:'OnePlus consistently under-promises and over-delivers on cameras. The 13 is their best yet — and it costs $300 less than anything it beats.', author:'Sarah Kim', read:'14 min', date:'Apr 30, 2026' },
+  { slug:'5g-explained', cat:'Smartphones', tone:4, title:'5G speeds decoded: what the numbers on your plan actually mean', excerpt:'Sub-6GHz, mmWave, and C-band — your carrier\'s marketing sheet is designed to confuse. Here\'s what these terms really mean for your real-world speed.', author:'Marcus Webb', read:'9 min', date:'Apr 25, 2026' },
+  { slug:'best-android-apps-2026', cat:'Apps & Software', tone:5, title:'50 best Android apps of 2026 — tested, ranked, and actually useful', excerpt:'After testing 200 apps across 12 categories, these 50 survived our ruthless cut. No filler, no sponsored picks — just apps worth space on your home screen.', author:'Priya Sharma', read:'16 min', date:'Apr 20, 2026' },
+  { slug:'speed-up-android', cat:'How-To', tone:6, title:'How to make any Android phone feel new again in 10 minutes', excerpt:'Animation settings, background process limits, battery optimisation, and the one developer option that transforms slow Androids. Takes 10 minutes, lasts forever.', author:'Alex Chen', read:'8 min', date:'Apr 15, 2026' },
+  { slug:'foldables-worth-it', cat:'Smartphones', tone:1, title:'Foldable phones in 2026: we tested them all — here\'s who should buy one', excerpt:'After a full year living with three foldables, we finally know which buyers will love them, which will regret it, and which models are actually reliable.', author:'Marcus Webb', read:'11 min', date:'Apr 10, 2026' },
+  { slug:'ios-19-hidden-features', cat:'iOS', tone:3, title:'iOS 19 hidden features: 14 things Apple didn\'t announce on stage', excerpt:'Apple announced the headlines, but buried in the update are 14 genuinely useful features they didn\'t talk about. Here\'s where to find them.', author:'Sarah Kim', read:'13 min', date:'Apr 5, 2026' },
 ];
 
-const CATS = ['all', 'Clinical Trials', 'Genomics', 'Neuroscience', 'Cardiology', 'Immunology', 'Public Health', 'Oncology', 'Psychiatry', 'Infectious Disease'];
-
-// Inline ads injected after these post indexes (0-based), mirroring the static design
-const AD_AFTER = new Set([1, 3, 5]);
-
 export default function BlogPage() {
-  const [active, setActive] = useState('all');
-
-  const visible = POSTS.filter((p) => active === 'all' || p.cat === active);
+  const [cat, setCat] = useState('all');
+  const visible = cat === 'all' ? POSTS : POSTS.filter((p) => p.cat === cat);
 
   return (
     <>
-      {/* TOP LARGE BANNER */}
       <div className="wrap ad-zone" style={{ paddingTop: 24 }}>
         <AdSlot size="large" id="blog-top-banner" tall />
       </div>
 
-      {/* PAGE TITLE + FILTERS */}
-      <section className="wrap" style={{ padding: '40px 28px 8px' }}>
-        <span className="eyebrow">The archive</span>
-        <h1 style={{ fontSize: 'clamp(40px,6vw,64px)', margin: '16px 0 10px' }}>Research, briefed.</h1>
-        <p className="muted" style={{ fontSize: 17, maxWidth: '56ch' }}>
-          Every study we cover, filtered to what matters. Browse by field.
-        </p>
+      <section className="wrap" style={{ padding: '40px 28px 28px' }}>
+        <span className="eyebrow">All articles</span>
+        <h1 style={{ fontSize: 'clamp(32px,5vw,56px)', margin: '14px 0 10px' }}>Reviews, guides & news</h1>
+        <p className="muted" style={{ fontSize: 17 }}>{POSTS.length} articles across {CATS.length - 1} categories.</p>
+      </section>
 
-        <div className="tags" style={{ marginTop: 26 }}>
+      <div className="wrap" style={{ padding: '0 28px 28px', overflowX: 'auto' }}>
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'nowrap', minWidth: 'max-content' }}>
           {CATS.map((c) => (
-            <button
-              key={c}
-              className={`tag${active === c ? ' active' : ''}`}
-              onClick={() => setActive(c)}
-              type="button"
-            >
-              {c === 'all' ? 'All' : c}
+            <button key={c} type="button" className={`tag${cat === c ? ' active' : ''}`} onClick={() => setCat(c)}
+              style={{ cursor: 'pointer', border: 'none', background: cat === c ? 'var(--accent)' : undefined, color: cat === c ? '#fff' : undefined, whiteSpace: 'nowrap' }}>
+              {c === 'all' ? 'All articles' : c}
             </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="wrap" style={{ padding: '0 28px' }}>
+        <AdSlot size="large" id="blog-filter-banner" />
+      </div>
+
+      <section className="wrap" style={{ padding: '32px 28px 60px' }}>
+        <div className="grid-3">
+          {visible.map((p, i) => (
+            <>
+              <Link key={p.slug} className="card" href={`/blog/${p.slug}`} data-nav>
+                <div className={`thumb tone-${p.tone} pat`}><span className="cat">{p.cat}</span></div>
+                <div className="card-body">
+                  <h3 className="card-title">{p.title}</h3>
+                  <p className="excerpt">{p.excerpt}</p>
+                  <div className="card-meta"><span>{p.author}</span><span className="dot"></span><span>{p.read}</span><span className="dot"></span><span>{p.date}</span></div>
+                </div>
+              </Link>
+              {(i === 2 || i === 8) && (
+                <AdSlot key={`ad-${i}`} size="small" id={`blog-inline-${i}`} style={{ height: 'auto', minHeight: 250 }} />
+              )}
+            </>
           ))}
         </div>
       </section>
 
-      {/* MAIN with SIDEBAR */}
-      <section className="wrap section" style={{ paddingTop: 32 }}>
-        <div className="with-side">
-          {/* POST LIST */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-            {visible.map((p, i) => (
-              <div key={p.slug} style={{ display: 'contents' }}>
-                <Link className="card post-row" href={`/blog/${p.slug}`} data-nav>
-                  <div className={`thumb tone-${p.tone} pat`}>
-                    <span className="cat">{p.cat}</span>
-                  </div>
-                  <div className="card-body">
-                    <h3 className="card-title">{p.title}</h3>
-                    <p className="excerpt">{p.excerpt}</p>
-                    <div className="card-meta">
-                      <span>{p.author}</span>
-                      <span className="dot"></span>
-                      <span>{p.read}</span>
-                      <span className="dot"></span>
-                      <span>{p.date}</span>
-                    </div>
-                  </div>
-                </Link>
-                {AD_AFTER.has(i) && (
-                  <AdSlot
-                    size="small"
-                    id={`blog-inline-ad-${i}`}
-                    label="Inline Rectangle"
-                    style={{ height: 'auto', minHeight: 160 }}
-                  />
-                )}
-              </div>
-            ))}
-
-            {/* PAGINATION */}
-            <div className="pager">
-              <a className="prev">← Prev</a>
-              <span className="cur">1</span>
-              <a>2</a>
-              <a>3</a>
-              <span className="gap">…</span>
-              <a>9</a>
-              <a className="next">Next →</a>
-            </div>
-          </div>
-
-          {/* SIDEBAR */}
-          <aside className="sidebar">
-            <AdSlot size="small" id="blog-side-ad-1" label="Sidebar" />
-            <div className="side-card">
-              <h4>The weekly briefing</h4>
-              <p className="muted" style={{ fontSize: 14, marginBottom: 14 }}>
-                One evidence-based email every Friday. No spam, no hype.
-              </p>
-              <a className="btn btn-primary" href="#" style={{ width: '100%', justifyContent: 'center' }}>
-                Subscribe free
-              </a>
-            </div>
-            <AdSlot size="small" id="blog-side-ad-2" label="Sidebar" />
-            <AdSlot size="small" id="blog-side-ad-3" label="Sidebar" />
-          </aside>
-        </div>
-      </section>
-
-      {/* MIDDLE LARGE BANNER */}
-      <div className="wrap ad-zone" style={{ padding: '8px 28px 24px' }}>
-        <AdSlot size="large" id="blog-middle-banner" label="Billboard" />
-      </div>
-
-      {/* pre-footer 2 small ads (#7,#8) */}
-      <div className="wrap ad-zone ad-300-wrap" style={{ padding: '8px 28px 24px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 16 }}>
-          <span className="faint" style={{ fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase' }}>
-            Sponsored
-          </span>
-          <span style={{ flex: 1, height: 1, background: 'var(--border)' }}></span>
-        </div>
-        <div style={{ display: 'flex', gap: 24, justifyContent: 'center', flexWrap: 'wrap' }}>
-          <AdSlot size="small" id="blog-prefooter-1" fluid={false} />
-          <AdSlot size="small" id="blog-prefooter-2" fluid={false} />
-        </div>
-      </div>
-
-      {/* BOTTOM LARGE BANNER */}
-      <div className="wrap ad-zone" style={{ padding: '0 28px' }}>
+      <div className="wrap ad-zone" style={{ padding: '0 28px 40px' }}>
         <AdSlot size="large" id="blog-bottom-banner" />
       </div>
     </>

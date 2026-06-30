@@ -3,278 +3,221 @@ import Link from 'next/link';
 
 type PostMeta = {
   title: string;
-  tags: string;
+  cat: string;
   author: string;
-  authorBlurb: string;
-  read: string;
   date: string;
+  read: string;
+  excerpt: string;
   tone: number;
 };
 
 const POSTS: Record<string, PostMeta> = {
-  'first-post': {
-    title: 'Inside the trial that rewired first-line treatment for Type 1 diabetes',
-    tags: 'Endocrinology · Clinical Trials',
-    author: 'Dr. Lena Okafor',
-    authorBlurb: 'Endocrinologist and contributing editor at Vitalis. Writes on metabolic disease, trial design, and the gap between evidence and practice.',
-    read: '14 min read',
-    date: 'June 1, 2026',
-    tone: 1,
-  },
-  'second-post': {
-    title: 'The gut–brain axis: what 1,200 patients taught us about mood',
-    tags: 'Neuroscience · Genomics',
-    author: 'Dr. Marcus Reyes',
-    authorBlurb: 'Neuroscientist and research director at Vitalis. Writes on the brain, behavior, and the microbiome.',
-    read: '9 min read',
-    date: 'May 28, 2026',
-    tone: 2,
-  },
-  'third-post': {
-    title: 'Reading the new GLP-1 cardiovascular outcomes data',
-    tags: 'Cardiology · Clinical Trials',
-    author: 'Dr. Priya Nandakumar',
-    authorBlurb: 'Cardiologist and clinical lead at Vitalis. Writes on metabolic and cardiovascular medicine.',
-    read: '11 min read',
-    date: 'May 24, 2026',
-    tone: 4,
-  },
-  'fourth-post': {
-    title: "Why most Phase II oncology trials stall — and what's changing",
-    tags: 'Clinical Trials · Oncology',
-    author: 'Dr. Sofia Haddad',
-    authorBlurb: 'Oncologist and clinical trials researcher at Vitalis. Writes on trial design, cancer biology, and translational medicine.',
-    read: '13 min read',
-    date: 'May 20, 2026',
-    tone: 3,
-  },
-  'fifth-post': {
-    title: 'Sleep debt and amyloid: a seven-year cohort, revisited',
-    tags: 'Neuroscience · Neurology',
-    author: 'Dr. Ian Whitfield',
-    authorBlurb: 'Neurologist and sleep researcher at Vitalis. Writes on cognition, neurodegeneration, and the science of rest.',
-    read: '8 min read',
-    date: 'May 17, 2026',
-    tone: 6,
-  },
-  'sixth-post': {
-    title: 'mRNA platforms after COVID: the next therapeutic decade',
-    tags: 'Immunology · Genomics',
-    author: 'Dr. Lena Okafor',
-    authorBlurb: 'Endocrinologist and contributing editor at Vitalis. Writes on metabolic disease, trial design, and the gap between evidence and practice.',
-    read: '10 min read',
-    date: 'May 13, 2026',
-    tone: 5,
-  },
-  'seventh-post': {
-    title: 'What 40,000 wearables revealed about heat and hospital visits',
-    tags: 'Public Health · Epidemiology',
-    author: 'Dr. Marcus Reyes',
-    authorBlurb: 'Neuroscientist and research director at Vitalis. Writes on the brain, behavior, and the microbiome.',
-    read: '7 min read',
-    date: 'May 9, 2026',
-    tone: 2,
-  },
-  'eighth-post': {
-    title: 'CRISPR in the clinic: what the first 200 treated patients show us',
-    tags: 'Genomics · Clinical Trials',
-    author: 'Dr. Sofia Haddad',
-    authorBlurb: 'Oncologist and clinical trials researcher at Vitalis. Writes on trial design, cancer biology, and translational medicine.',
-    read: '16 min read',
-    date: 'May 5, 2026',
-    tone: 3,
-  },
-  'ninth-post': {
-    title: 'Ketamine for depression: separating the signal from the noise',
-    tags: 'Psychiatry · Neuroscience',
-    author: 'Dr. Ian Whitfield',
-    authorBlurb: 'Neurologist and sleep researcher at Vitalis. Writes on cognition, neurodegeneration, and the science of rest.',
-    read: '12 min read',
-    date: 'April 30, 2026',
-    tone: 1,
-  },
-  'tenth-post': {
-    title: 'Antimicrobial resistance: the slow pandemic reshaping surgery',
-    tags: 'Infectious Disease · Public Health',
-    author: 'Dr. Priya Nandakumar',
-    authorBlurb: 'Cardiologist and clinical lead at Vitalis. Writes on metabolic and cardiovascular medicine.',
-    read: '10 min read',
-    date: 'April 25, 2026',
-    tone: 4,
-  },
-  'eleventh-post': {
-    title: 'CAR-T at five years: what the long-term remission data finally tells us',
-    tags: 'Oncology · Immunology',
-    author: 'Dr. Sofia Haddad',
-    authorBlurb: 'Oncologist and clinical trials researcher at Vitalis. Writes on trial design, cancer biology, and translational medicine.',
-    read: '14 min read',
-    date: 'April 20, 2026',
-    tone: 5,
-  },
-  'twelfth-post': {
-    title: "The blood pressure paradox: why treating to target isn't always enough",
-    tags: 'Cardiology · Clinical Trials',
-    author: 'Dr. Priya Nandakumar',
-    authorBlurb: 'Cardiologist and clinical lead at Vitalis. Writes on metabolic and cardiovascular medicine.',
-    read: '9 min read',
-    date: 'April 15, 2026',
-    tone: 4,
-  },
-  'thirteenth-post': {
-    title: 'Polygenic risk scores: closer to the clinic than you think',
-    tags: 'Genomics · Cardiology',
-    author: 'Dr. Marcus Reyes',
-    authorBlurb: 'Neuroscientist and research director at Vitalis. Writes on the brain, behavior, and the microbiome.',
-    read: '11 min read',
-    date: 'April 10, 2026',
-    tone: 2,
-  },
-  'fourteenth-post': {
-    title: 'Autoimmunity after COVID: the emerging long-haul immune picture',
-    tags: 'Immunology · Infectious Disease',
-    author: 'Dr. Lena Okafor',
-    authorBlurb: 'Endocrinologist and contributing editor at Vitalis. Writes on metabolic disease, trial design, and the gap between evidence and practice.',
-    read: '13 min read',
-    date: 'April 5, 2026',
-    tone: 6,
-  },
+  'android-16-features': { title:'Android 16: the features that actually change how you use your phone', cat:'Android', author:'Alex Chen', date:'Jun 1, 2026', read:'12 min', excerpt:'Google\'s biggest Android release in years landed this week. We tested every new feature to find out which ones actually matter.', tone:1 },
+  'galaxy-s25-ultra-review': { title:'Galaxy S25 Ultra review: two months, one camera, no going back', cat:'Smartphones', author:'Sarah Kim', date:'May 28, 2026', read:'15 min', excerpt:'After two months of daily use, Samsung\'s Ultra still sets the bar every other Android phone has to clear.', tone:2 },
+  'iphone-17-vs-pixel-9': { title:'iPhone 17 vs Pixel 9 Pro: the camera shootout that settles the debate', cat:'Reviews', author:'Marcus Webb', date:'May 24, 2026', read:'11 min', excerpt:'400 photos, six lighting conditions, three countries. One camera wins — and it\'s not the one everyone expected.', tone:4 },
+  'best-budget-android-2026': { title:'Best budget Android phones under $200 in 2026', cat:'Android', author:'Priya Sharma', date:'May 20, 2026', read:'9 min', excerpt:'Great Android experiences no longer require a four-figure budget. These six phones prove the sub-$200 category has never been stronger.', tone:3 },
+  'smartphone-battery-fix': { title:'Why your phone battery dies fast — and exactly how to fix it', cat:'How-To', author:'Alex Chen', date:'May 17, 2026', read:'8 min', excerpt:'Most battery drain problems trace back to four very fixable habits.', tone:6 },
+  'chatgpt-mobile-tips': { title:'ChatGPT on mobile: the power features 90% of users never find', cat:'AI & Mobile', author:'Priya Sharma', date:'May 13, 2026', read:'10 min', excerpt:'Hidden shortcuts, memory controls, and workflow hacks that make ChatGPT actually useful every day.', tone:5 },
+  'wearables-2026': { title:'Smartwatches in 2026: we tested every major model — here\'s who wins', cat:'Wearables', author:'Zara Ahmed', date:'May 9, 2026', read:'16 min', excerpt:'Eight weeks. Six watches. One conclusion: battery life is still the dealbreaker no spec sheet can hide.', tone:2 },
+  'android-malware-guide': { title:'How to spot and remove Android malware before it steals your data', cat:'Cybersecurity', author:'James Carter', date:'May 5, 2026', read:'13 min', excerpt:'Signs of infection, tools to clean your device, and the habits that prevent reinfection.', tone:3 },
+  'oneplus-13-camera': { title:'OnePlus 13 camera deep-dive: flagship quality at half the price', cat:'Reviews', author:'Sarah Kim', date:'Apr 30, 2026', read:'14 min', excerpt:'OnePlus\'s best camera yet — and it costs $300 less than the phones it beats.', tone:1 },
+  '5g-explained': { title:'5G speeds decoded: what the numbers on your plan actually mean', cat:'Smartphones', author:'Marcus Webb', date:'Apr 25, 2026', read:'9 min', excerpt:'Sub-6GHz, mmWave, and C-band explained without the carrier marketing spin.', tone:4 },
+  'best-android-apps-2026': { title:'50 best Android apps of 2026 — tested, ranked, and actually useful', cat:'Apps & Software', author:'Priya Sharma', date:'Apr 20, 2026', read:'16 min', excerpt:'200 apps tested. 50 survived. No filler, no sponsored picks — just apps worth installing.', tone:5 },
+  'speed-up-android': { title:'How to make any Android phone feel new again in 10 minutes', cat:'How-To', author:'Alex Chen', date:'Apr 15, 2026', read:'8 min', excerpt:'Animation settings, background limits, and the developer option that transforms slow phones. Ten minutes, permanent results.', tone:6 },
+  'foldables-worth-it': { title:'Foldable phones in 2026: we tested them all — here\'s who should buy one', cat:'Smartphones', author:'Marcus Webb', date:'Apr 10, 2026', read:'11 min', excerpt:'After a year with three foldables, we know who they\'re for and who should stick with slabs.', tone:1 },
+  'ios-19-hidden-features': { title:'iOS 19 hidden features: 14 things Apple didn\'t announce on stage', cat:'iOS', author:'Sarah Kim', date:'Apr 5, 2026', read:'13 min', excerpt:'Apple buried 14 genuinely useful features in iOS 19. Here\'s where to find them.', tone:3 },
 };
 
 const RELATED = [
-  { slug: 'second-post', tone: 2, cat: 'Neuroscience', title: 'The gut–brain axis: what 1,200 patients taught us about mood', author: 'Dr. Marcus Reyes', read: '9 min' },
-  { slug: 'third-post', tone: 4, cat: 'Cardiology', title: 'Reading the new GLP-1 cardiovascular outcomes data', author: 'Dr. Priya Nandakumar', read: '11 min' },
-  { slug: 'sixth-post', tone: 5, cat: 'Immunology', title: 'mRNA platforms after COVID: the next therapeutic decade', author: 'Dr. Lena Okafor', read: '10 min' },
+  { slug:'galaxy-s25-ultra-review', tone:2, cat:'Smartphones', title:'Galaxy S25 Ultra: two months of real use', author:'Sarah Kim', read:'15 min' },
+  { slug:'best-budget-android-2026', tone:3, cat:'Android', title:'Best budget Android phones under $200', author:'Priya Sharma', read:'9 min' },
+  { slug:'speed-up-android', tone:6, cat:'How-To', title:'Make any Android feel new in 10 minutes', author:'Alex Chen', read:'8 min' },
 ];
 
-export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const post = POSTS[slug] ?? POSTS['first-post'];
+export default function PostPage({ params }: { params: { slug: string } }) {
+  const post = POSTS[params.slug];
+
+  if (!post) {
+    return (
+      <div className="wrap" style={{ padding: '80px 28px', textAlign: 'center' }}>
+        <h1>Article not found</h1>
+        <p className="muted" style={{ marginTop: 12 }}>This article may have moved or been removed.</p>
+        <Link className="btn btn-primary" href="/blog" data-nav style={{ marginTop: 24, display: 'inline-flex' }}>Back to Reviews →</Link>
+      </div>
+    );
+  }
 
   return (
     <>
-      {/* LARGE BANNER ABOVE CONTENT (#1) */}
+      {/* Top ad */}
       <div className="wrap ad-zone" style={{ paddingTop: 24 }}>
         <AdSlot size="large" id="post-top-banner" tall />
       </div>
 
-      {/* ARTICLE HEADER */}
-      <section className="wrap" style={{ padding: '36px 28px 0' }}>
-        <div style={{ maxWidth: 760 }}>
-          <Link href="/blog" data-nav className="eyebrow" style={{ cursor: 'pointer' }}>
-            {post.tags}
-          </Link>
-          <h1 style={{ fontSize: 'clamp(38px,5.4vw,60px)', margin: '18px 0 22px', lineHeight: 1.04 }}>
-            {post.title}
-          </h1>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 14, flexWrap: 'wrap', color: 'var(--muted)', fontSize: 14.5 }}>
-            <span style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <span style={{ width: 38, height: 38, borderRadius: '50%', background: 'linear-gradient(135deg,var(--accent),#2a1758)', display: 'inline-block' }}></span>
-              <b style={{ color: 'var(--text)', fontWeight: 600 }}>{post.author}</b>
-            </span>
-            <span className="dot"></span><span>Endocrinologist, contributing editor</span>
-            <span className="dot"></span><span>{post.read}</span>
-            <span className="dot"></span><span>{post.date}</span>
-          </div>
-        </div>
-      </section>
-
-      {/* MAIN with SIDEBAR */}
-      <section className="wrap section" style={{ paddingTop: 34 }}>
-        <div className="with-side">
-          {/* ARTICLE */}
-          <article className="article" style={{ maxWidth: 760 }}>
-            <figure style={{ marginTop: 0 }}>
-              <div className={`fig-ph thumb tone-${post.tone} pat`} style={{ height: 380 }}></div>
-              <figcaption>Islet autoimmunity progression in at-risk cohorts. Illustrative — replace with study figure.</figcaption>
-            </figure>
-
-            <p>For three decades, a Type 1 diabetes diagnosis arrived with the same blunt prescription: lifelong insulin, beginning the day the beta cells gave out. The TN-10 follow-up data, presented this spring, is the first hard evidence that the timeline itself is negotiable.</p>
-
-            <p>In a cohort of relatives with two or more islet autoantibodies — people at high risk but not yet symptomatic — a 14-day course of teplizumab delayed the onset of clinical disease by a median of roughly two years versus placebo. For a teenager, that is two more years of working pancreatic function, and two more years before the daily arithmetic of insulin begins.</p>
-
-            <h2>What the trial actually measured</h2>
-            <p>The primary endpoint was time to clinical diagnosis, defined by standard glucose-tolerance thresholds. Crucially, the trial enrolled on the basis of immune markers, not symptoms — a design choice that let investigators intervene during the silent, pre-clinical window when beta-cell mass is declining but not yet gone.</p>
-            <p>That window is the whole story. Teplizumab is an anti-CD3 monoclonal antibody; it blunts the autoreactive T cells doing the damage. Hit those cells early enough and you preserve function that, post-diagnosis, is already lost.</p>
-
-            {/* between-section small ad (#1) */}
-            <div className="ad-zone ad-300-wrap" style={{ padding: '8px 0' }}>
-              <AdSlot size="small" id="post-content-ad-1" label="In-content" style={{ height: 'auto', minHeight: 160 }} />
-            </div>
-
-            <h2>The two-year signal, in context</h2>
-            <p>Two years is not a cure, and the authors are careful not to frame it as one. But in a disease where progression has felt inexorable, a durable delay reshapes the conversation — about screening, about when to treat, and about what &quot;first-line&quot; even means.</p>
-            <blockquote>&quot;We&apos;ve spent forty years managing the consequences. This is the first time we&apos;ve meaningfully changed the slope of the curve before symptoms appear.&quot;</blockquote>
-            <p>The effect was not uniform. Responders tended to be younger and to carry a specific HLA profile, hinting that the future of the therapy is stratified rather than universal.</p>
-
-            {/* between-section small ad (#2) */}
-            <div className="ad-zone ad-300-wrap" style={{ padding: '8px 0' }}>
-              <AdSlot size="small" id="post-content-ad-2" label="In-content" style={{ height: 'auto', minHeight: 160 }} />
-            </div>
-
-            {/* MID-CONTENT LARGE BANNER (#2) */}
-            <div className="ad-zone" style={{ padding: '18px 0' }}>
-              <AdSlot size="large" id="post-mid-banner" label="In-article Billboard" />
-            </div>
-
-            <h2>Caveats worth keeping</h2>
-            <p>Enthusiasm should be measured against the trial&apos;s real limits:</p>
-            <ul>
-              <li><b>Small, enriched cohort.</b> Participants were autoantibody-positive relatives — not the general population — so screening logistics remain unsolved.</li>
-              <li><b>Transient side effects.</b> A predictable lymphopenia and rash followed dosing; manageable, but not nothing in otherwise-healthy adolescents.</li>
-              <li><b>Durability unknown past the window.</b> We have years, not decades, of follow-up. Whether the delay compounds or simply shifts the timeline is the open question.</li>
-            </ul>
-
-            {/* between-section small ad (#3) */}
-            <div className="ad-zone ad-300-wrap" style={{ padding: '8px 0' }}>
-              <AdSlot size="small" id="post-content-ad-3" label="In-content" style={{ height: 'auto', minHeight: 160 }} />
-            </div>
-
-            <h2>What it changes at the bedside</h2>
-            <p>The practical shift is upstream. If a two-week course can buy years, the value of identifying at-risk individuals before symptoms — through family history and autoantibody panels — rises sharply. Several pediatric centers are already piloting targeted screening in first-degree relatives.</p>
-            <p>None of this replaces insulin for those already diagnosed. But for the first time, the standard of care has a plausible &quot;before&quot; — a stage at which we intervene to protect function rather than merely replace it.</p>
-
-            {/* between-section small ad (#4) */}
-            <div className="ad-zone ad-300-wrap" style={{ padding: '8px 0' }}>
-              <AdSlot size="small" id="post-content-ad-4" label="In-content" style={{ height: 'auto', minHeight: 160 }} />
-            </div>
-
-            {/* author / source */}
-            <div className="side-card" style={{ marginTop: 8, display: 'flex', gap: 18, alignItems: 'flex-start' }}>
-              <span style={{ width: 54, height: 54, flex: 'none', borderRadius: '50%', background: 'linear-gradient(135deg,var(--accent),#2a1758)' }}></span>
-              <div>
-                <h4 style={{ fontFamily: 'var(--font-display)', fontSize: 21, marginBottom: 4 }}>{post.author}</h4>
-                <p className="muted" style={{ fontSize: 14 }}>{post.authorBlurb}</p>
-              </div>
-            </div>
-          </article>
-
-          {/* STICKY SIDEBAR: TOC + 4 small ads (#5–#8) */}
-          <aside className="sidebar">
-            <AdSlot size="small" id="post-side-ad-1" label="Sidebar" />
-            <div className="side-card">
-              <h4 style={{ fontSize: 18 }}>In this article</h4>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 9, marginTop: 10, fontSize: 14 }}>
-                <a className="muted" href="#">What the trial measured</a>
-                <a className="muted" href="#">The two-year signal</a>
-                <a className="muted" href="#">Caveats worth keeping</a>
-                <a className="muted" href="#">What it changes at the bedside</a>
-              </div>
-            </div>
-            <AdSlot size="small" id="post-side-ad-2" label="Sidebar" />
-            <AdSlot size="small" id="post-side-ad-3" label="Sidebar" />
-            <AdSlot size="small" id="post-side-ad-4" label="Sidebar" />
-          </aside>
-        </div>
-      </section>
-
-      {/* LARGE BANNER BELOW CONTENT (#3) */}
-      <div className="wrap ad-zone" style={{ padding: '0 28px' }}>
-        <AdSlot size="large" id="post-bottom-banner" />
+      {/* Breadcrumb */}
+      <div className="wrap" style={{ padding: '20px 28px 0', fontSize: 13, color: 'var(--muted)', display: 'flex', gap: 8, alignItems: 'center' }}>
+        <Link href="/" data-nav style={{ color: 'inherit', textDecoration: 'none' }}>Home</Link>
+        <span>/</span>
+        <Link href="/blog" data-nav style={{ color: 'inherit', textDecoration: 'none' }}>Reviews</Link>
+        <span>/</span>
+        <span className="cat" style={{ fontSize: 12 }}>{post.cat}</span>
       </div>
 
-      {/* RELATED */}
+      {/* Hero */}
+      <section className="wrap" style={{ padding: '28px 28px 0', maxWidth: 800 }}>
+        <span className="cat" style={{ marginBottom: 14, display: 'block' }}>{post.cat}</span>
+        <h1 style={{ fontSize: 'clamp(28px,4.5vw,52px)', lineHeight: 1.08, margin: '0 0 20px' }}>{post.title}</h1>
+        <p className="muted" style={{ fontSize: 18, lineHeight: 1.6, marginBottom: 24 }}>{post.excerpt}</p>
+        <div className="card-meta" style={{ fontSize: 14, marginBottom: 28 }}>
+          <span>{post.author}</span><span className="dot"></span><span>{post.date}</span><span className="dot"></span><span>{post.read} read</span>
+        </div>
+      </section>
+
+      {/* Thumb */}
+      <div className="wrap" style={{ padding: '0 28px 32px' }}>
+        <div className={`thumb tone-${post.tone} pat`} style={{ borderRadius: 20, minHeight: 320, aspectRatio: '16/7' }}>
+          <span className="cat" style={{ position: 'absolute', bottom: 20, left: 20, fontSize: 13 }}>{post.cat}</span>
+        </div>
+      </div>
+
+      {/* Body */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 300px', gap: 48, maxWidth: 1200, margin: '0 auto', padding: '0 28px' }}>
+        <article className="article-body">
+          <AdSlot size="small" id="post-inline-1" />
+
+          <h2>What&apos;s actually new — and why it matters</h2>
+          <p>
+            Every major Android release arrives with a list of features that reads like a marketing brief. Most of them land as minor tweaks dressed up as revolutions. A few, though, genuinely change the way the phone feels to use — and Android 16 has more of the latter than we&apos;ve seen in years.
+          </p>
+          <p>
+            We spent three weeks running Android 16 across four different devices — a Pixel 9 Pro, a Galaxy S25, a mid-range Motorola, and an older OnePlus — to find out which features survive contact with real-world use and which ones disappear into the settings menu within 48 hours.
+          </p>
+
+          <h2>The new notification system</h2>
+          <p>
+            Android&apos;s notification system has needed a serious rethink for years, and Google has finally delivered one. The new Adaptive Notifications layer uses on-device AI to group, prioritise, and — crucially — silently log low-priority alerts instead of interrupting you with them.
+          </p>
+          <p>
+            In practice, the difference is dramatic. After training for about a week, the system correctly identified 84% of the alerts we&apos;d have swiped away anyway and handled them silently. The remaining 16% (mostly banking and security notifications) came through normally. You can review the silenced batch at any time from the new Notification History card.
+          </p>
+          <p>
+            This alone is worth the update if you find your phone constantly competing for your attention.
+          </p>
+
+          <AdSlot size="small" id="post-inline-2" />
+
+          <h2>Battery intelligence, finally done right</h2>
+          <p>
+            Google has been promising smarter charging for three releases. Android 16 is the first version where it actually works. The Adaptive Charging engine now learns your specific schedule — not a generic overnight window — and adjusts charge rates accordingly.
+          </p>
+          <p>
+            If you consistently plug in at midnight and unplug at 7am, it charges to 80% quickly, holds there, then fills the last 20% between 5:30 and 6:45am. This keeps the battery at lower charge states for most of the night, which meaningfully extends long-term battery health.
+          </p>
+          <p>
+            Over our three-week test, the system predicted our morning unplug time correctly 91% of the time. On missed predictions, it erred on the side of a fuller charge rather than leaving us short.
+          </p>
+
+          <blockquote style={{ borderLeft: '4px solid var(--accent)', paddingLeft: 24, margin: '32px 0', fontStyle: 'italic', fontSize: 18, color: 'var(--text)' }}>
+            &ldquo;Android 16 feels like the first release in a long time where the features they announced are the features you&apos;ll actually use.&rdquo;
+          </blockquote>
+
+          <AdSlot size="large" id="post-inline-3" />
+
+          <h2>Privacy controls get a proper overhaul</h2>
+          <p>
+            The new Privacy Hub is the single clearest indicator that Google has been watching what Apple does and taking notes. It consolidates all permission controls — camera, microphone, location, contacts, health data — into one dashboard with timeline graphs showing exactly which app accessed what and when.
+          </p>
+          <p>
+            More importantly, there are now two new permission tiers that didn&apos;t exist before: Temporary Access (an app gets one-time permission for a single session) and Background Watch (you can see if an app is quietly accessing the microphone in the background, with an automatic alert if it does).
+          </p>
+          <p>
+            The Background Watch feature caught one of our test apps accessing the microphone during idle time. We won&apos;t name it, but we deleted it immediately.
+          </p>
+
+          <h2>The Live Captions upgrade</h2>
+          <p>
+            Live Captions — Google&apos;s on-device real-time transcription — has been upgraded with two genuinely useful additions: speaker identification and translation. Speaker ID labels different voices in a conversation, while translation can render captions in a different language from the spoken audio in real time.
+          </p>
+          <p>
+            The translation is handled entirely on-device with no network round-trip. Quality is good enough for casual conversation (we tested English → Urdu, English → Spanish, and English → Korean) but it struggles with regional accents and technical vocabulary. Still, for free, offline, real-time translation, it is remarkable.
+          </p>
+
+          <AdSlot size="small" id="post-inline-4" />
+
+          <h2>UI changes: subtle but consistent</h2>
+          <p>
+            The visual refresh in Android 16 isn&apos;t dramatic — it&apos;s the kind of polish you notice after a week rather than in the first five minutes. Corner radii are slightly larger, animations are more fluid, and the Quick Settings panel has been reorganised so the controls you actually need (Bluetooth, hotspot, screen rotation) are in the top row by default instead of buried.
+          </p>
+          <p>
+            The lock screen gets the most noticeable treatment: customisation options that used to require a third-party launcher are now built in, including adjustable clock styles, a shortcut bar with up to four apps, and a new &ldquo;Now Playing&rdquo; widget that stays visible when music is active.
+          </p>
+
+          <h2>Who should update, and who should wait</h2>
+          <p>
+            If you&apos;re on a Pixel 7 or later, update immediately — the notification system and battery intelligence improvements alone justify it. If you&apos;re on a Samsung Galaxy S24 series or later, Samsung has already confirmed a clean One UI 8 rollout that preserves their features, so the same applies.
+          </p>
+          <p>
+            If you&apos;re on a mid-range device from a smaller manufacturer, wait two to three weeks for them to push a carrier-approved build. Early test builds from some brands had instability issues with third-party launcher compatibility that should be resolved by then.
+          </p>
+          <p>
+            One caveat: if you rely heavily on any banking apps, check the compatibility list before updating. Two major banking apps had root detection issues in early Android 16 builds that haven&apos;t been fully resolved as of this writing.
+          </p>
+
+          <AdSlot size="large" id="post-inline-5" />
+
+          <h2>The verdict</h2>
+          <p>
+            Android 16 is the first Android release in three years where we would recommend updating immediately rather than waiting for stability. The notification intelligence, battery management improvements, and privacy overhaul are all genuinely useful — not features that sound good in a press release but disappear into the noise.
+          </p>
+          <p>
+            The challenge, as always, is fragmentation. These features land on Pixels first and may take months to reach other manufacturers&apos; devices. If you&apos;re on a Pixel, you have one of the strongest software arguments for that platform in years. If you&apos;re on anything else, some of these features may look different — or not arrive at all.
+          </p>
+
+          {/* Tags */}
+          <div style={{ marginTop: 40, display: 'flex', gap: 10, flexWrap: 'wrap', borderTop: '1px solid var(--border)', paddingTop: 28 }}>
+            {['Android 16','Android','Google','Pixel','Smartphones','Software Update'].map((t) => (
+              <span key={t} className="tag" style={{ fontSize: 13 }}>{t}</span>
+            ))}
+          </div>
+
+          {/* Author card */}
+          <div style={{ marginTop: 32, padding: '24px 28px', background: 'var(--surface)', borderRadius: 16, display: 'flex', gap: 20, alignItems: 'flex-start' }}>
+            <div style={{ width: 56, height: 56, borderRadius: '50%', background: 'linear-gradient(135deg,var(--accent),#1a0a3d)', flexShrink: 0 }}></div>
+            <div>
+              <div style={{ fontWeight: 700, fontSize: 16 }}>{post.author}</div>
+              <div className="muted" style={{ fontSize: 13, marginTop: 2, marginBottom: 8 }}>Senior editor, Android & Software · TechPulse</div>
+              <p className="muted" style={{ fontSize: 14, lineHeight: 1.55 }}>
+                Alex has been covering Android since the Nexus era. He tests every major release on at least three devices and maintains the TechPulse app compatibility database.
+              </p>
+            </div>
+          </div>
+
+          <AdSlot size="large" id="post-bottom-1" />
+          <AdSlot size="small" id="post-bottom-2" />
+        </article>
+
+        {/* Sidebar */}
+        <aside style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+          <AdSlot size="small" id="post-sidebar-1" />
+          <AdSlot size="small" id="post-sidebar-2" />
+          <AdSlot size="small" id="post-sidebar-3" />
+          <div style={{ background: 'var(--surface)', borderRadius: 16, padding: '22px 20px' }}>
+            <div className="eyebrow" style={{ marginBottom: 10 }}>Newsletter</div>
+            <p className="muted" style={{ fontSize: 14, lineHeight: 1.5, marginBottom: 16 }}>Top 5 tech stories every Friday, free.</p>
+            <input type="email" placeholder="your@email.com" style={{ width: '100%', background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 10, padding: '12px 14px', fontSize: 14, color: 'var(--text)', outline: 'none', boxSizing: 'border-box' }} />
+            <a href="#" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center', marginTop: 10 }}>Subscribe →</a>
+          </div>
+          <AdSlot size="small" id="post-sidebar-4" />
+          <AdSlot size="small" id="post-sidebar-5" />
+        </aside>
+      </div>
+
+      {/* Related articles */}
       <section className="wrap section">
-        <div className="section-head"><h2>Keep reading</h2></div>
+        <div className="section-head">
+          <div><span className="eyebrow">Keep reading</span><h2 style={{ marginTop: 14 }}>Related articles</h2></div>
+          <Link className="btn btn-ghost" href="/blog" data-nav>All reviews →</Link>
+        </div>
         <div className="grid-3">
           {RELATED.map((r) => (
             <Link key={r.slug} className="card" href={`/blog/${r.slug}`} data-nav>
@@ -287,6 +230,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           ))}
         </div>
       </section>
+
+      <div className="wrap ad-zone" style={{ padding: '20px 28px 40px' }}>
+        <AdSlot size="large" id="post-footer-banner" />
+      </div>
     </>
   );
 }

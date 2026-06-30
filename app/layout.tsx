@@ -3,9 +3,9 @@ import "./globals.css";
 import Layout from "@/components/Layout";
 
 export const metadata: Metadata = {
-  title: "Vitalis — Medical Research, Read Clearly",
+  title: "TechPulse — Mobile & Tech, Explained Simply",
   description:
-    "Vitalis distills clinical trials, genomics, and the breakthroughs reshaping care — written by working researchers, for clinicians and the curious alike.",
+    "TechPulse covers the latest Android phones, iOS updates, app reviews, and mobile tech news — honest reviews and guides written by real enthusiasts.",
 };
 
 export default function RootLayout({
