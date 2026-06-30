@@ -23,9 +23,16 @@ const POSTS: Post[] = [
   { slug: 'fifth-post', cat: 'Neuroscience', tone: 6, title: 'Sleep debt and amyloid: a seven-year cohort, revisited', excerpt: 'Chronic short sleep tracks with faster amyloid accumulation — but causation stays slippery.', author: 'Dr. Ian Whitfield', read: '8 min', date: 'May 17, 2026' },
   { slug: 'sixth-post', cat: 'Immunology', tone: 5, title: 'mRNA platforms after COVID: the next therapeutic decade', excerpt: 'From oncology vaccines to autoimmune tolerance, the pipeline is broader than you think.', author: 'Dr. Lena Okafor', read: '10 min', date: 'May 13, 2026' },
   { slug: 'seventh-post', cat: 'Public Health', tone: 2, title: 'What 40,000 wearables revealed about heat and hospital visits', excerpt: 'A continental dataset turns anecdote into signal: heat thresholds that predict ER load.', author: 'Dr. Marcus Reyes', read: '7 min', date: 'May 9, 2026' },
+  { slug: 'eighth-post', cat: 'Genomics', tone: 3, title: 'CRISPR in the clinic: what the first 200 treated patients show us', excerpt: 'Early gene-editing trials for sickle cell and beta-thalassemia are yielding durable responses — and raising new questions about access.', author: 'Dr. Sofia Haddad', read: '16 min', date: 'May 5, 2026' },
+  { slug: 'ninth-post', cat: 'Psychiatry', tone: 1, title: 'Ketamine for depression: separating the signal from the noise', excerpt: 'Rapid antidepressant effects are real — but patient selection and dosing protocols remain deeply contested.', author: 'Dr. Ian Whitfield', read: '12 min', date: 'Apr 30, 2026' },
+  { slug: 'tenth-post', cat: 'Infectious Disease', tone: 4, title: 'Antimicrobial resistance: the slow pandemic reshaping surgery', excerpt: 'Drug-resistant organisms are quietly changing what procedures we can safely perform — and on whom.', author: 'Dr. Priya Nandakumar', read: '10 min', date: 'Apr 25, 2026' },
+  { slug: 'eleventh-post', cat: 'Oncology', tone: 5, title: 'CAR-T at five years: what the long-term remission data finally tells us', excerpt: 'Durable responses in diffuse large B-cell lymphoma point toward a genuine cure for a subset of patients.', author: 'Dr. Sofia Haddad', read: '14 min', date: 'Apr 20, 2026' },
+  { slug: 'twelfth-post', cat: 'Cardiology', tone: 4, title: 'The blood pressure paradox: why treating to target isn\'t always enough', excerpt: 'New meta-analysis of 180,000 patients challenges the assumption that lower is always better.', author: 'Dr. Priya Nandakumar', read: '9 min', date: 'Apr 15, 2026' },
+  { slug: 'thirteenth-post', cat: 'Genomics', tone: 2, title: 'Polygenic risk scores: closer to the clinic than you think', excerpt: 'Multi-ancestry validation data suggests PRS-guided screening could reshape preventive cardiology within the decade.', author: 'Dr. Marcus Reyes', read: '11 min', date: 'Apr 10, 2026' },
+  { slug: 'fourteenth-post', cat: 'Immunology', tone: 6, title: 'Autoimmunity after COVID: the emerging long-haul immune picture', excerpt: 'Persistent dysregulation in B and T cell populations is reshaping how we think about post-viral syndromes.', author: 'Dr. Lena Okafor', read: '13 min', date: 'Apr 5, 2026' },
 ];
 
-const CATS = ['all', 'Clinical Trials', 'Genomics', 'Neuroscience', 'Cardiology', 'Immunology', 'Public Health'];
+const CATS = ['all', 'Clinical Trials', 'Genomics', 'Neuroscience', 'Cardiology', 'Immunology', 'Public Health', 'Oncology', 'Psychiatry', 'Infectious Disease'];
 
 // Inline ads injected after these post indexes (0-based), mirroring the static design
 const AD_AFTER = new Set([1, 3, 5]);
