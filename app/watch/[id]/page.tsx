@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import AdSlot from '@/components/AdSlot';
+import { POST_IMAGES } from '@/lib/post-images';
 
 const NOVAPLEX_DOMAIN = 'novaplex-links.pages.dev';
 const STEP_TIMER = 15;
@@ -133,7 +134,7 @@ function Step0({ ready, onContinue }: { ready: boolean; onContinue: () => void }
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: '1.85fr 1fr', gap: 28, alignItems: 'start' }}>
           <div className="card" style={{ cursor: 'default' }}>
-            <div className="thumb tone-1 pat" style={{ aspectRatio: '16/10' }}><span className="cat">Android</span></div>
+            <div className="thumb tone-1" style={{ aspectRatio: '16/10' }}><img src={POST_IMAGES['android-16-features']} alt="Android 16" /><span className="cat">Android</span></div>
             <div className="card-body" style={{ padding: '28px 30px 30px' }}>
               <h3 className="card-title" style={{ fontSize: 34, lineHeight: 1.05 }}>
                 Android 16: the features that actually change how you use your phone
@@ -162,7 +163,7 @@ function Step0({ ready, onContinue }: { ready: boolean; onContinue: () => void }
             { tone:5, cat:'AI & Mobile', title:'ChatGPT on mobile: the power features 90% of users never find', excerpt:'Hidden shortcuts, voice tricks, and workflow tips that make the app actually useful.', author:'Priya Sharma', read:'10 min' },
           ].map((p) => (
             <div key={p.title} className="card" style={{ cursor: 'default' }}>
-              <div className={`thumb tone-${p.tone} pat`}><span className="cat">{p.cat}</span></div>
+              <div className={`thumb tone-${p.tone}`}><img src={POST_IMAGES[p.slug as keyof typeof POST_IMAGES] ?? POST_IMAGES['android-16-features']} alt={p.title} /><span className="cat">{p.cat}</span></div>
               <div className="card-body">
                 <h3 className="card-title">{p.title}</h3>
                 <p className="excerpt">{p.excerpt}</p>
@@ -197,7 +198,7 @@ function Step0({ ready, onContinue }: { ready: boolean; onContinue: () => void }
             { tone:3, cat:'Cybersecurity', title:'How to spot and remove Android malware before it steals your data', excerpt:'Signs your phone is infected, tools to clean it, and habits to never get hit again.', author:'James Carter', read:'13 min', date:'May 5, 2026' },
           ].map((p) => (
             <div key={p.title} className="card" style={{ cursor: 'default' }}>
-              <div className={`thumb tone-${p.tone} pat`} style={{ aspectRatio: '16/9' }}><span className="cat">{p.cat}</span></div>
+              <div className={`thumb tone-${p.tone}`} style={{ aspectRatio: '16/9' }}><img src={POST_IMAGES[p.slug as keyof typeof POST_IMAGES] ?? POST_IMAGES['android-16-features']} alt={p.title} /><span className="cat">{p.cat}</span></div>
               <div className="card-body" style={{ padding: '22px 24px 24px' }}>
                 <h3 className="card-title" style={{ fontSize: 22 }}>{p.title}</h3>
                 <p className="excerpt">{p.excerpt}</p>
@@ -283,7 +284,7 @@ function Step1({ ready, onContinue }: { ready: boolean; onContinue: () => void }
             ].map((p, i) => (
               <div key={p.title}>
                 <div style={{ display: 'grid', gridTemplateColumns: '90px 1fr', gap: 20, padding: '22px 0', borderBottom: '1px solid var(--border)', alignItems: 'start' }}>
-                  <div className={`thumb tone-${p.tone} pat`} style={{ height: 72, borderRadius: 10 }}><span className="cat" style={{ fontSize: 10 }}>{p.cat}</span></div>
+                  <div className={`thumb tone-${p.tone}`} style={{ height: 72, borderRadius: 10 }}><img src={POST_IMAGES[p.slug as keyof typeof POST_IMAGES] ?? POST_IMAGES['android-16-features']} alt={p.title} /><span className="cat" style={{ fontSize: 10 }}>{p.cat}</span></div>
                   <div>
                     <h3 style={{ fontSize: 17, fontWeight: 600, lineHeight: 1.35, marginBottom: 6 }}>{p.title}</h3>
                     <p className="muted" style={{ fontSize: 14, lineHeight: 1.55, marginBottom: 8 }}>{p.excerpt}</p>
@@ -356,7 +357,7 @@ function Step2({ ready, onContinue }: { ready: boolean; onContinue: () => void }
         <div className="with-side">
           <article className="article" style={{ maxWidth: 760 }}>
             <figure style={{ marginTop: 0 }}>
-              <div className="fig-ph thumb tone-1 pat" style={{ height: 320 }}></div>
+              <div className="fig-ph thumb tone-1" style={{ height: 320 }}><img src={POST_IMAGES['android-16-features']} alt="Android 16 on Pixel" /></div>
               <figcaption>Android 16 running on a Pixel 9 Pro. Photo: TechPulse / Alex Chen.</figcaption>
             </figure>
             <p>Every major Android release arrives with a list of features that reads like a marketing brief. Most land as minor tweaks dressed up as revolutions. A few genuinely change the way the phone feels to use — and Android 16 has more of the latter than we&apos;ve seen in years.</p>
@@ -440,7 +441,7 @@ function Step2({ ready, onContinue }: { ready: boolean; onContinue: () => void }
             { tone:5, cat:'AI & Mobile', title:'ChatGPT on mobile: the power features you\'re missing', author:'Priya Sharma', read:'10 min' },
           ].map((r) => (
             <div key={r.title} className="card" style={{ cursor: 'default' }}>
-              <div className={`thumb tone-${r.tone} pat`}><span className="cat">{r.cat}</span></div>
+              <div className={`thumb tone-${r.tone}`}><img src={POST_IMAGES[r.slug as keyof typeof POST_IMAGES] ?? POST_IMAGES['android-16-features']} alt={r.title} /><span className="cat">{r.cat}</span></div>
               <div className="card-body">
                 <h3 className="card-title">{r.title}</h3>
                 <div className="card-meta"><span>{r.author}</span><span className="dot"></span><span>{r.read}</span></div>

@@ -1,5 +1,6 @@
 import AdSlot from '@/components/AdSlot';
 import Link from 'next/link';
+import { POST_IMAGES } from '@/lib/post-images';
 
 export const metadata = {
   title: 'TechPulse — Mobile & Tech, Explained Simply',
@@ -48,7 +49,8 @@ export default function Home() {
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: '1.85fr 1fr', gap: 28, alignItems: 'start' }}>
           <Link className="card" href="/blog/android-16-features" data-nav>
-            <div className="thumb tone-1 pat" style={{ aspectRatio: '16/10' }}>
+            <div className="thumb tone-1" style={{ aspectRatio: '16/10' }}>
+              <img src={POST_IMAGES['android-16-features']} alt="Android 16 on Pixel phone" />
               <span className="cat">Android</span>
             </div>
             <div className="card-body" style={{ padding: '28px 30px 30px' }}>
@@ -80,7 +82,7 @@ export default function Home() {
             { slug:'chatgpt-mobile-tips', tone:5, cat:'AI & Mobile', title:'ChatGPT on mobile: the power features 90% of users never find', excerpt:'Hidden shortcuts, voice tricks, and workflow tips that make the app actually useful.', author:'Priya Sharma', read:'10 min' },
           ].map((p) => (
             <Link key={p.slug} className="card" href={`/blog/${p.slug}`} data-nav>
-              <div className={`thumb tone-${p.tone} pat`}><span className="cat">{p.cat}</span></div>
+              <div className={`thumb tone-${p.tone}`}><img src={POST_IMAGES[p.slug]} alt={p.title} /><span className="cat">{p.cat}</span></div>
               <div className="card-body">
                 <h3 className="card-title">{p.title}</h3>
                 <p className="excerpt">{p.excerpt}</p>
@@ -133,7 +135,7 @@ export default function Home() {
             { slug:'android-malware-guide', tone:3, cat:'Cybersecurity', title:'How to spot and remove Android malware before it steals your data', excerpt:'Signs your phone is infected, tools to clean it, and habits to never get hit again.', author:'James Carter', read:'13 min', date:'May 5, 2026' },
           ].map((p) => (
             <Link key={p.slug} className="card" href={`/blog/${p.slug}`} data-nav>
-              <div className={`thumb tone-${p.tone} pat`} style={{ aspectRatio: '16/9' }}><span className="cat">{p.cat}</span></div>
+              <div className={`thumb tone-${p.tone}`} style={{ aspectRatio: '16/9' }}><img src={POST_IMAGES[p.slug]} alt={p.title} /><span className="cat">{p.cat}</span></div>
               <div className="card-body" style={{ padding: '22px 24px 24px' }}>
                 <h3 className="card-title" style={{ fontSize: 22 }}>{p.title}</h3>
                 <p className="excerpt">{p.excerpt}</p>
@@ -185,7 +187,7 @@ export default function Home() {
             { slug:'foldables-worth-it', tone:5, cat:'Smartphones', title:'Foldable phones in 2026: we tested them all — here\'s who should buy one', excerpt:'After a year of foldable phones, we finally know who they\'re actually for.', author:'Marcus Webb', read:'11 min' },
           ].map((p) => (
             <Link key={p.slug} className="card" href={`/blog/${p.slug}`} data-nav>
-              <div className={`thumb tone-${p.tone} pat`}><span className="cat">{p.cat}</span></div>
+              <div className={`thumb tone-${p.tone}`}><img src={POST_IMAGES[p.slug]} alt={p.title} /><span className="cat">{p.cat}</span></div>
               <div className="card-body">
                 <h3 className="card-title">{p.title}</h3>
                 <p className="excerpt">{p.excerpt}</p>

@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import AdSlot from '@/components/AdSlot';
+import { POST_IMAGES } from '@/lib/post-images';
 
 const CATS = ['all','Android','iOS','Smartphones','Reviews','Apps & Software','How-To','Wearables','Gaming','Cybersecurity','AI & Mobile'];
 
@@ -59,7 +60,7 @@ export default function BlogPage() {
           {visible.map((p, i) => (
             <>
               <Link key={p.slug} className="card" href={`/blog/${p.slug}`} data-nav>
-                <div className={`thumb tone-${p.tone} pat`}><span className="cat">{p.cat}</span></div>
+                <div className={`thumb tone-${p.tone}`}><img src={POST_IMAGES[p.slug]} alt={p.title} /><span className="cat">{p.cat}</span></div>
                 <div className="card-body">
                   <h3 className="card-title">{p.title}</h3>
                   <p className="excerpt">{p.excerpt}</p>

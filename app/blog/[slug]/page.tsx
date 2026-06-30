@@ -1,5 +1,6 @@
 import AdSlot from '@/components/AdSlot';
 import Link from 'next/link';
+import { POST_IMAGES } from '@/lib/post-images';
 
 type PostMeta = {
   title: string;
@@ -75,7 +76,8 @@ export default function PostPage({ params }: { params: { slug: string } }) {
 
       {/* Thumb */}
       <div className="wrap" style={{ padding: '0 28px 32px' }}>
-        <div className={`thumb tone-${post.tone} pat`} style={{ borderRadius: 20, minHeight: 320, aspectRatio: '16/7' }}>
+        <div className={`thumb tone-${post.tone}`} style={{ borderRadius: 20, minHeight: 320, aspectRatio: '16/7' }}>
+          <img src={POST_IMAGES[params.slug]} alt={post.title} />
           <span className="cat" style={{ position: 'absolute', bottom: 20, left: 20, fontSize: 13 }}>{post.cat}</span>
         </div>
       </div>
@@ -221,7 +223,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
         <div className="grid-3">
           {RELATED.map((r) => (
             <Link key={r.slug} className="card" href={`/blog/${r.slug}`} data-nav>
-              <div className={`thumb tone-${r.tone} pat`}><span className="cat">{r.cat}</span></div>
+              <div className={`thumb tone-${r.tone}`}><img src={POST_IMAGES[r.slug]} alt={r.title} /><span className="cat">{r.cat}</span></div>
               <div className="card-body">
                 <h3 className="card-title">{r.title}</h3>
                 <div className="card-meta"><span>{r.author}</span><span className="dot"></span><span>{r.read}</span></div>
