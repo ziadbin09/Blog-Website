@@ -33,17 +33,16 @@ export default function AdTimerNotice() {
             display: 'inline-flex',
             alignItems: 'center',
             gap: 8,
-            color: 'var(--text)',
-            background: 'var(--surface)',
-            border: '1.5px solid var(--accent-line)',
+            color: 'white',
+            background: 'var(--accent)',
             borderRadius: 100,
-            padding: '8px 18px',
-            fontSize: 14,
-            fontWeight: 500,
+            padding: '9px 20px',
+            fontSize: 14.5,
+            fontWeight: 700,
+            boxShadow: '0 8px 22px -10px var(--accent)',
           }}
         >
-          Loading ads&hellip;
-          <b style={{ color: 'var(--accent-text)', fontWeight: 700 }}>{secondsLeft}s</b>
+          Loading&hellip; {secondsLeft}s
         </span>
       )}
     </section>
