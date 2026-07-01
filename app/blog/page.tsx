@@ -37,7 +37,11 @@ export default function BlogPage() {
       <section className="wrap" style={{ padding: '40px 28px 28px' }}>
         <span className="eyebrow">All articles</span>
         <h1 style={{ fontSize: 'clamp(32px,5vw,56px)', margin: '14px 0 10px' }}>Reviews, guides & news</h1>
-        <p className="muted" style={{ fontSize: 17 }}>{POSTS.length} articles across {CATS.length - 1} categories.</p>
+        <p className="muted" style={{ fontSize: 17, maxWidth: '68ch', lineHeight: 1.6 }}>
+          {POSTS.length} articles across {CATS.length - 1} categories — every phone review, how-to guide, and
+          explainer we&apos;ve published, updated as new devices and software land. Every device is bought with our
+          own budget and used as a daily driver before we publish a verdict.
+        </p>
       </section>
 
       <div className="wrap" style={{ padding: '0 28px 28px', overflowX: 'auto' }}>
@@ -54,6 +58,24 @@ export default function BlogPage() {
       <div className="wrap" style={{ padding: '0 28px' }}>
         <AdSlot size="large" id="blog-filter-banner" />
       </div>
+
+      <section className="wrap" style={{ padding: '32px 28px 0' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
+          {[
+            { cat: 'Android', desc: 'OS releases, feature deep-dives, and phone reviews from every major manufacturer.' },
+            { cat: 'iOS', desc: 'Apple software updates and iPhone coverage, including features Apple doesn\'t put on stage.' },
+            { cat: 'Smartphones', desc: 'Cross-platform comparisons, foldables, and connectivity explainers like 5G.' },
+            { cat: 'Reviews', desc: 'In-depth, long-term testing of flagship and mid-range devices — no first-impressions pieces.' },
+            { cat: 'How-To', desc: 'Step-by-step fixes for battery drain, slow performance, and other everyday phone problems.' },
+            { cat: 'Cybersecurity', desc: 'Malware detection, mobile privacy, and the habits that keep your data safe.' },
+          ].map((c) => (
+            <button key={c.cat} type="button" onClick={() => setCat(c.cat)} style={{ textAlign: 'left', background: 'var(--surface)', border: 'none', borderRadius: 14, padding: '18px 20px', cursor: 'pointer' }}>
+              <div style={{ fontWeight: 700, fontSize: 15, marginBottom: 6 }}>{c.cat}</div>
+              <div className="muted" style={{ fontSize: 13.5, lineHeight: 1.5 }}>{c.desc}</div>
+            </button>
+          ))}
+        </div>
+      </section>
 
       <section className="wrap" style={{ padding: '32px 28px 60px' }}>
         <div className="grid-3">

@@ -1,7 +1,7 @@
 import AdSlot from '@/components/AdSlot';
 
 export const metadata = {
-  title: 'Vitalis Daily — Get the App',
+  title: 'TechPulse — Get the App',
 };
 
 export default function AppPage() {
@@ -21,7 +21,7 @@ export default function AppPage() {
           </div>
           <h2 style={{ fontSize: 30, marginBottom: 8 }}>Watch Ad to Unlock</h2>
           <p className="muted" style={{ fontSize: 15, maxWidth: '46ch', margin: '0 auto 20px' }}>
-            View a short rewarded video to unlock Vitalis Daily Premium free for 7 days — full study archive, no
+            View a short rewarded video to unlock TechPulse Premium free for 7 days — offline article downloads, no
             banner ads.
           </p>
           <button className="btn btn-primary" style={{ margin: '0 auto' }}>
@@ -53,10 +53,11 @@ export default function AppPage() {
             </svg>
           </div>
           <span className="eyebrow" style={{ justifyContent: 'center' }}>Companion app</span>
-          <h1 style={{ fontSize: 'clamp(40px,6vw,60px)', margin: '16px 0 14px' }}>Vitalis Daily</h1>
+          <h1 style={{ fontSize: 'clamp(40px,6vw,60px)', margin: '16px 0 14px' }}>TechPulse Mobile</h1>
           <p className="muted" style={{ fontSize: 18, maxWidth: '54ch', margin: '0 auto', lineHeight: 1.6 }}>
-            Your evidence-based health journal. Track symptoms and medications, get plain-language explainers on the
-            studies that matter, and turn research into routine — privately, on your phone.
+            Every review, guide, and breaking tech story in one fast, ad-light app. Get push alerts the moment a
+            phone we&apos;re testing ships a review, save articles for offline reading, and track prices on the
+            devices you&apos;re actually considering.
           </p>
           <div style={{ display: 'flex', gap: 18, justifyContent: 'center', marginTop: 22, color: 'var(--faint)', fontSize: 13.5, flexWrap: 'wrap' }}>
             <span>★ 4.8 · 12k ratings</span><span className="dot"></span><span>50k+ downloads</span><span className="dot"></span><span>Free · no tracking</span>
@@ -92,26 +93,62 @@ export default function AppPage() {
               <span className="ic">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12h3l2 6 4-14 2 8h2l2-3h3" /></svg>
               </span>
-              <div><b>Symptom &amp; vitals journal</b><p>Log how you feel in seconds; spot patterns with clean weekly trends.</p></div>
+              <div><b>Breaking news alerts</b><p>Push notifications the moment a major phone, OS update, or security story drops — tuned to the categories you follow.</p></div>
             </div>
             <div className="row">
               <span className="ic">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M8 2v4M16 2v4M3 10h18"></path></svg>
               </span>
-              <div><b>Medication reminders</b><p>Schedules that adapt to your day, with adherence you can actually see.</p></div>
+              <div><b>Price tracking</b><p>Follow any phone or gadget from our reviews and get alerted the moment its price drops.</p></div>
             </div>
             <div className="row">
               <span className="ic">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
               </span>
-              <div><b>Research explainers</b><p>The same briefs from Vitalis, distilled for your conditions of interest.</p></div>
+              <div><b>Offline reading</b><p>Save any review or guide to read later — no signal required, no re-loading ads.</p></div>
             </div>
             <div className="row">
               <span className="ic">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
               </span>
-              <div><b>Private by design</b><p>Your data stays on-device by default. Export or delete it any time.</p></div>
+              <div><b>Private by design</b><p>No location tracking, no third-party ad SDKs bundled with your account data. Export or delete it any time.</p></div>
             </div>
+          </div>
+        </div>
+
+        {/* TESTIMONIALS */}
+        <div style={{ marginTop: 56, maxWidth: 720, marginInline: 'auto', textAlign: 'left' }}>
+          <h2 style={{ fontSize: 32, textAlign: 'center', marginBottom: 30 }}>What readers say</h2>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+            {[
+              { quote: 'The price tracker alone saved me $180 on the Galaxy S25 — it caught a drop I would have completely missed.', name: 'Devon R.', rating: '★★★★★' },
+              { quote: 'Offline reading is genuinely useful on my commute. No other tech app I\'ve tried does this well.', name: 'Amara T.', rating: '★★★★★' },
+              { quote: 'Notifications are tuned to what I actually care about — Android and cybersecurity — not every story on the site.', name: 'Luis M.', rating: '★★★★☆' },
+            ].map((t) => (
+              <div key={t.name} style={{ background: 'var(--surface)', borderRadius: 14, padding: '18px 22px' }}>
+                <div style={{ color: 'var(--accent)', fontSize: 14, marginBottom: 8 }}>{t.rating}</div>
+                <p style={{ fontSize: 15, lineHeight: 1.55, color: 'var(--text)' }}>&ldquo;{t.quote}&rdquo;</p>
+                <div className="faint" style={{ fontSize: 13, marginTop: 8 }}>— {t.name}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* FAQ */}
+        <div style={{ marginTop: 56, maxWidth: 680, marginInline: 'auto', textAlign: 'left' }}>
+          <h2 style={{ fontSize: 32, textAlign: 'center', marginBottom: 30 }}>Frequently asked questions</h2>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+            {[
+              { q: 'Is the app really free?', a: 'Yes. The core app — every review, guide, and news alert — is free with light banner ads. Premium removes ads and adds offline downloads for $2.99/month.' },
+              { q: 'Does it work on iOS?', a: 'The Android app is available now. An iOS version is in testing and expected later this year — subscribe to the newsletter for the launch date.' },
+              { q: 'How is my data used?', a: 'We don\'t sell reading history or location data to advertisers. See our full breakdown on the Privacy Policy page.' },
+              { q: 'Can I sync saved articles across devices?', a: 'Yes, sign in with the same account on any Android device and your saved and offline articles sync automatically.' },
+            ].map((item) => (
+              <div key={item.q} style={{ borderBottom: '1px solid var(--border)', paddingBottom: 18 }}>
+                <h4 style={{ fontSize: 16, marginBottom: 6 }}>{item.q}</h4>
+                <p className="muted" style={{ fontSize: 14.5, lineHeight: 1.6 }}>{item.a}</p>
+              </div>
+            ))}
           </div>
         </div>
 

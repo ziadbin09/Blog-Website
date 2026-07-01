@@ -263,6 +263,69 @@ export default function Home() {
         </div>
       </section>
 
+      {/* TESTIMONIALS */}
+      <section className="wrap section">
+        <div className="section-head">
+          <div><span className="eyebrow">Reader feedback</span><h2 style={{ marginTop: 14 }}>What our readers say</h2></div>
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
+          {[
+            { quote: 'The battery-life numbers in the wearables piece matched what I actually saw on my own watch. Refreshing to read a review that doesn\'t just repeat the spec sheet.', name: 'Priya N.', role: 'Reader since 2024' },
+            { quote: 'Switched to a budget Android after reading the sub-$200 guide. Saved $600 and haven\'t noticed a difference for what I actually use my phone for.', name: 'Tomasz K.', role: 'Reader since 2025' },
+            { quote: 'The malware guide walked me through cleaning an infected phone step by step. First tech article that actually solved my problem instead of just describing it.', name: 'Grace O.', role: 'Reader since 2023' },
+          ].map((t) => (
+            <div key={t.name} style={{ background: 'var(--surface)', borderRadius: 16, padding: '24px 22px', display: 'flex', flexDirection: 'column', gap: 14 }}>
+              <div style={{ color: 'var(--accent)', fontSize: 14 }}>★★★★★</div>
+              <p style={{ fontSize: 15, lineHeight: 1.6, color: 'var(--text)', flex: 1 }}>&ldquo;{t.quote}&rdquo;</p>
+              <div>
+                <div style={{ fontWeight: 600, fontSize: 14 }}>{t.name}</div>
+                <div className="faint" style={{ fontSize: 12.5 }}>{t.role}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* AWARDS / RANKINGS */}
+      <section className="wrap section">
+        <div className="section-head">
+          <div><span className="eyebrow">Recognition</span><h2 style={{ marginTop: 14 }}>Trusted by readers and the industry</h2></div>
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 20 }}>
+          {[
+            ['#3', 'Independent Tech Media Awards, 2026'],
+            ['Top 10', 'Most-cited mobile reviews site, 2025'],
+            ['4.8★', 'Average reader rating across 12,000+ reviews'],
+            ['150+', 'Devices independently purchased and tested'],
+          ].map(([n, l]) => (
+            <div key={l} style={{ background: 'var(--surface)', borderRadius: 16, padding: '26px 20px', textAlign: 'center' }}>
+              <div style={{ fontFamily: 'var(--font-display)', fontSize: 30, color: 'var(--accent)' }}>{n}</div>
+              <div className="muted" style={{ fontSize: 13, marginTop: 8, lineHeight: 1.4 }}>{l}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="wrap section">
+        <div className="section-head">
+          <div><span className="eyebrow">FAQ</span><h2 style={{ marginTop: 14 }}>Common questions</h2></div>
+        </div>
+        <div style={{ maxWidth: 760, display: 'flex', flexDirection: 'column', gap: 22 }}>
+          {[
+            { q: 'How does TechPulse choose what to review?', a: 'We prioritize devices readers are actually deciding between — new flagships, strong budget options, and categories with active reader questions like wearables and foldables.' },
+            { q: 'Do you accept payment for positive reviews?', a: 'No. We buy the devices we review with our own budget and do not accept payment, free units, or early-access deals in exchange for coverage.' },
+            { q: 'How long do you test a device before reviewing it?', a: 'A minimum of two weeks as a daily driver for phones, and six to eight weeks for wearables and other devices where battery degradation and long-term reliability matter.' },
+            { q: 'Can I suggest a device or topic for review?', a: 'Yes — reach out through the newsletter reply or contact details on our Privacy Policy page and our editors review every suggestion.' },
+          ].map((item) => (
+            <div key={item.q} style={{ borderBottom: '1px solid var(--border)', paddingBottom: 20 }}>
+              <h4 style={{ fontSize: 17, marginBottom: 8 }}>{item.q}</h4>
+              <p className="muted" style={{ fontSize: 15, lineHeight: 1.6 }}>{item.a}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <div className="wrap ad-zone ad-300-wrap" style={{ padding: '20px 28px 8px' }}>
         <div style={{ display: 'flex', gap: 24, justifyContent: 'center', flexWrap: 'wrap' }}>
           <AdSlot size="small" id="home-prefooter-1" fluid={false} /><AdSlot size="small" id="home-prefooter-2" fluid={false} />
