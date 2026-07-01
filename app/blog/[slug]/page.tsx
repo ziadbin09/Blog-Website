@@ -1,6 +1,9 @@
 import AdSlot from '@/components/AdSlot';
 import InArticleAd from '@/components/InArticleAd';
 import MultiplexAd from '@/components/MultiplexAd';
+import AdTimerProvider from '@/components/AdTimerProvider';
+import AdTimerNotice from '@/components/AdTimerNotice';
+import AdTimerNextButton from '@/components/AdTimerNextButton';
 import Link from 'next/link';
 import { POST_IMAGES } from '@/lib/post-images';
 
@@ -414,11 +417,13 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const quoteAfter = Math.min(2, body.sections.length - 1);
 
   return (
-    <>
+    <AdTimerProvider>
       {/* Top ad */}
       <div className="wrap ad-zone" style={{ paddingTop: 24 }}>
         <AdSlot size="large" id="post-top-banner" tall />
       </div>
+
+      {slug === 'android-16-features' && <AdTimerNotice />}
 
       {/* Breadcrumb */}
       <div className="wrap" style={{ padding: '20px 28px 0', fontSize: 13, color: 'var(--muted)', display: 'flex', gap: 8, alignItems: 'center' }}>
@@ -531,16 +536,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       </div>
 
       {/* NEXT: to Get the App (only on the "Latest" article) */}
-      {slug === 'android-16-features' && (
-        <section className="wrap" style={{ padding: '0 28px 60px', textAlign: 'center' }}>
-          <Link className="btn btn-primary" href="/app" data-nav style={{ display: 'inline-flex' }}>
-            Next
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
-            </svg>
-          </Link>
-        </section>
-      )}
-    </>
+      {slug === 'android-16-features' && <AdTimerNextButton href="/app" />}
+    </AdTimerProvider>
   );
 }

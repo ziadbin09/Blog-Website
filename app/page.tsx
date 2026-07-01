@@ -1,6 +1,9 @@
 import AdSlot from '@/components/AdSlot';
 import InFeedAd from '@/components/InFeedAd';
 import MultiplexAd from '@/components/MultiplexAd';
+import AdTimerProvider from '@/components/AdTimerProvider';
+import AdTimerNotice from '@/components/AdTimerNotice';
+import AdTimerNextButton from '@/components/AdTimerNextButton';
 import Link from 'next/link';
 import { POST_IMAGES } from '@/lib/post-images';
 
@@ -10,10 +13,12 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <>
+    <AdTimerProvider>
       <div className="wrap ad-zone" style={{ paddingTop: 24 }}>
         <AdSlot size="large" id="home-top-banner" tall />
       </div>
+
+      <AdTimerNotice />
 
       {/* HERO */}
       <section className="wrap" style={{ padding: '48px 28px 24px' }}>
@@ -343,14 +348,7 @@ export default function Home() {
       </div>
 
       {/* NEXT: to Reviews */}
-      <section className="wrap" style={{ padding: '40px 28px 60px', textAlign: 'center' }}>
-        <Link className="btn btn-primary" href="/blog" data-nav style={{ display: 'inline-flex' }}>
-          Next
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
-          </svg>
-        </Link>
-      </section>
-    </>
+      <AdTimerNextButton href="/blog" />
+    </AdTimerProvider>
   );
 }

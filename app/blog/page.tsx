@@ -4,6 +4,9 @@ import Link from 'next/link';
 import { useState } from 'react';
 import AdSlot from '@/components/AdSlot';
 import InFeedAd from '@/components/InFeedAd';
+import AdTimerProvider from '@/components/AdTimerProvider';
+import AdTimerNotice from '@/components/AdTimerNotice';
+import AdTimerNextButton from '@/components/AdTimerNextButton';
 import { POST_IMAGES } from '@/lib/post-images';
 
 const CATS = ['all','Android','iOS','Smartphones','Reviews','Apps & Software','How-To','Wearables','Gaming','Cybersecurity','AI & Mobile'];
@@ -30,10 +33,12 @@ export default function BlogPage() {
   const visible = cat === 'all' ? POSTS : POSTS.filter((p) => p.cat === cat);
 
   return (
-    <>
+    <AdTimerProvider>
       <div className="wrap ad-zone" style={{ paddingTop: 24 }}>
         <AdSlot size="large" id="blog-top-banner" tall />
       </div>
+
+      <AdTimerNotice />
 
       <section className="wrap" style={{ padding: '40px 28px 28px' }}>
         <span className="eyebrow">All articles</span>
@@ -103,14 +108,7 @@ export default function BlogPage() {
       </div>
 
       {/* NEXT: to Latest */}
-      <section className="wrap" style={{ padding: '0 28px 60px', textAlign: 'center' }}>
-        <Link className="btn btn-primary" href="/blog/android-16-features" data-nav style={{ display: 'inline-flex' }}>
-          Next
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
-          </svg>
-        </Link>
-      </section>
-    </>
+      <AdTimerNextButton href="/blog/android-16-features" />
+    </AdTimerProvider>
   );
 }
