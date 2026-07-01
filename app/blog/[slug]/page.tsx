@@ -1,4 +1,6 @@
 import AdSlot from '@/components/AdSlot';
+import InArticleAd from '@/components/InArticleAd';
+import MultiplexAd from '@/components/MultiplexAd';
 import Link from 'next/link';
 import { POST_IMAGES } from '@/lib/post-images';
 
@@ -448,7 +450,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       {/* Body */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 300px', gap: 48, maxWidth: 1200, margin: '0 auto', padding: '0 28px' }}>
         <article className="article-body">
-          <AdSlot size="small" id="post-inline-1" />
+          <InArticleAd id="post-inline-1" />
 
           {body.sections.map((s, i) => (
             <div key={i}>
@@ -459,7 +461,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                   &ldquo;{body.quote}&rdquo;
                 </blockquote>
               )}
-              {(i === 1 || i === 3) && <AdSlot size={i === 3 ? 'large' : 'small'} id={`post-inline-${i + 2}`} />}
+              {(i === 1 || i === 3) && <InArticleAd id={`post-inline-${i + 2}`} />}
             </div>
           ))}
 
@@ -482,8 +484,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             </div>
           </div>
 
-          <AdSlot size="large" id="post-bottom-1" />
-          <AdSlot size="small" id="post-bottom-2" />
+          <InArticleAd id="post-bottom-1" />
         </article>
 
         {/* Sidebar */}
@@ -520,6 +521,10 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           ))}
         </div>
       </section>
+
+      <div className="wrap" style={{ padding: '0 28px 20px' }}>
+        <MultiplexAd id="post-recommend" />
+      </div>
 
       <div className="wrap ad-zone" style={{ padding: '20px 28px 40px' }}>
         <AdSlot size="large" id="post-footer-banner" />

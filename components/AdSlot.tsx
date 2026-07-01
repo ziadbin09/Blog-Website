@@ -5,6 +5,7 @@ import GoogleAd from './GoogleAd';
 // Undefined => AdSlot falls back to the placeholder box below.
 const SLOTS: Partial<Record<'large' | 'small', string>> = {
   small: '3347321825',
+  large: '1678604247',
 };
 
 interface AdSlotProps {

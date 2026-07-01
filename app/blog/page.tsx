@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import AdSlot from '@/components/AdSlot';
+import InFeedAd from '@/components/InFeedAd';
 import { POST_IMAGES } from '@/lib/post-images';
 
 const CATS = ['all','Android','iOS','Smartphones','Reviews','Apps & Software','How-To','Wearables','Gaming','Cybersecurity','AI & Mobile'];
@@ -90,7 +91,7 @@ export default function BlogPage() {
                 </div>
               </Link>
               {(i === 2 || i === 8) && (
-                <AdSlot key={`ad-${i}`} size="small" id={`blog-inline-${i}`} style={{ height: 'auto', minHeight: 250 }} />
+                <InFeedAd key={`ad-${i}`} id={`blog-inline-${i}`} style={{ height: 'auto', minHeight: 250 }} />
               )}
             </>
           ))}

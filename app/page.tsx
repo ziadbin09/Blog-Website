@@ -1,4 +1,6 @@
 import AdSlot from '@/components/AdSlot';
+import InFeedAd from '@/components/InFeedAd';
+import MultiplexAd from '@/components/MultiplexAd';
 import Link from 'next/link';
 import { POST_IMAGES } from '@/lib/post-images';
 
@@ -90,7 +92,7 @@ export default function Home() {
               </div>
             </Link>
           ))}
-          <AdSlot size="small" id="home-grid-ad" style={{ height: 'auto', minHeight: 250 }} />
+          <InFeedAd id="home-grid-ad" style={{ height: 'auto', minHeight: 250 }} />
         </div>
       </section>
 
@@ -197,6 +199,10 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      <div className="wrap" style={{ padding: '0 28px 20px' }}>
+        <MultiplexAd id="home-recommend" />
+      </div>
 
       {/* PULL QUOTE */}
       <section className="wrap" style={{ padding: '20px 28px 60px' }}>
