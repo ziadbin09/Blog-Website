@@ -392,9 +392,10 @@ function getRelated(currentSlug: string) {
   return [...sameCat, ...rest].slice(0, 3).map(([slug, p]) => ({ slug, ...p }));
 }
 
-export default function PostPage({ params }: { params: { slug: string } }) {
-  const post = POSTS[params.slug];
-  const body = BODIES[params.slug];
+export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = POSTS[slug];
+  const body = BODIES[slug];
 
   if (!post || !body) {
     return (
@@ -407,7 +408,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
   }
 
   const authorInfo = AUTHOR_BIOS[post.author];
-  const related = getRelated(params.slug);
+  const related = getRelated(slug);
   const quoteAfter = Math.min(2, body.sections.length - 1);
 
   return (
@@ -439,7 +440,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
       {/* Thumb */}
       <div className="wrap" style={{ padding: '0 28px 32px' }}>
         <div className={`thumb tone-${post.tone}`} style={{ borderRadius: 20, minHeight: 320, aspectRatio: '16/7' }}>
-          <img src={POST_IMAGES[params.slug]} alt={post.title} />
+          <img src={POST_IMAGES[slug]} alt={post.title} />
           <span className="cat" style={{ position: 'absolute', bottom: 20, left: 20, fontSize: 13 }}>{post.cat}</span>
         </div>
       </div>
