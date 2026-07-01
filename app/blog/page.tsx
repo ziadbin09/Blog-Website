@@ -101,6 +101,16 @@ export default function BlogPage() {
       <div className="wrap ad-zone" style={{ padding: '0 28px 40px' }}>
         <AdSlot size="large" id="blog-bottom-banner" />
       </div>
+
+      {/* NEXT: to Latest */}
+      <section className="wrap" style={{ padding: '0 28px 60px', textAlign: 'center' }}>
+        <Link className="btn btn-primary" href="/blog/android-16-features" data-nav style={{ display: 'inline-flex' }}>
+          Next
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </Link>
+      </section>
     </>
   );
 }

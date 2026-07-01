@@ -341,6 +341,16 @@ export default function Home() {
       <div className="wrap ad-zone" style={{ padding: '24px 28px 0' }}>
         <AdSlot size="large" id="home-bottom-banner" />
       </div>
+
+      {/* NEXT: to Reviews */}
+      <section className="wrap" style={{ padding: '40px 28px 60px', textAlign: 'center' }}>
+        <Link className="btn btn-primary" href="/blog" data-nav style={{ display: 'inline-flex' }}>
+          Next
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </Link>
+      </section>
     </>
   );
 }
