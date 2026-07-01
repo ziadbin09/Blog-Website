@@ -50,15 +50,9 @@ export default function Header() {
 
         <nav className="nav-links">
           {LINKS.map((l) => (
-            isWatch ? (
-              <span key={l.href} style={{ opacity: 0.35, cursor: 'not-allowed', userSelect: 'none', fontSize: 14 }}>
-                {l.label}
-              </span>
-            ) : (
-              <Link key={l.href} href={l.href} data-nav className={isActive(l.href) ? 'active' : undefined}>
-                {l.label}
-              </Link>
-            )
+            <span key={l.href} className={`nav-link${isActive(l.href) ? ' active' : ''}`}>
+              {l.label}
+            </span>
           ))}
         </nav>
 
@@ -83,7 +77,7 @@ export default function Header() {
       <div className={`mobile-menu${menuOpen ? ' open' : ''}`}>
         <div className="wrap">
           {LINKS.filter((l) => l.href !== '/app').map((l) => (
-            <Link key={l.href} href={l.href} data-nav className={isActive(l.href) ? 'active' : undefined}>{l.label}</Link>
+            <span key={l.href} className={`nav-link${isActive(l.href) ? ' active' : ''}`}>{l.label}</span>
           ))}
           <Link className="btn btn-primary" href="/app" data-nav>Get the App</Link>
         </div>
