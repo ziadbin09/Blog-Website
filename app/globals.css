@@ -277,6 +277,13 @@ p { margin: 0; }
 .ad-banner { width: 100%; min-height: 132px; }
 .ad-banner.tall { min-height: 168px; }
 
+/* live AdSense units: stack a static label above the ad instead of
+   overlaying it, and drop the placeholder's decorative guide */
+.ad-live { display: flex; flex-direction: column; gap: 8px; padding: 10px; }
+.ad-live::after { display: none; }
+.ad-live .ad-tag { position: static; }
+.ad-live .adsbygoogle { width: 100%; }
+
 /* small 300x250 */
 .ad-300 { width: 300px; max-width: 100%; height: 250px; margin-inline: auto; }
 .ad-300.fluid { width: 100%; }

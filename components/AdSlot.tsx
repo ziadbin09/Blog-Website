@@ -1,4 +1,11 @@
 import { CSSProperties } from 'react';
+import GoogleAd from './GoogleAd';
+
+// Real AdSense slot IDs, filled in as ad units are created in the dashboard.
+// Undefined => AdSlot falls back to the placeholder box below.
+const SLOTS: Partial<Record<'large' | 'small', string>> = {
+  small: '3347321825',
+};
 
 interface AdSlotProps {
   /** "large" => 970x250 leaderboard/billboard banner, "small" => 300x250 rectangle */
@@ -26,7 +33,17 @@ export default function AdSlot({
   className = '',
   style,
 }: AdSlotProps) {
+  const slot = SLOTS[size];
+
   if (size === 'large') {
+    if (slot) {
+      return (
+        <div id={id} className={`ad ad-banner ad-live${tall ? ' tall' : ''} ${className}`.trim()} style={style}>
+          <span className="ad-tag">Ad</span>
+          <GoogleAd slot={slot} />
+        </div>
+      );
+    }
     return (
       <div id={id} className={`ad ad-banner${tall ? ' tall' : ''} ${className}`.trim()} style={style}>
         <span className="ad-tag">Ad</span>
@@ -34,6 +51,15 @@ export default function AdSlot({
           <b>{label ?? 'Leaderboard'}</b>
           {dims ?? '970 × 250'}
         </span>
+      </div>
+    );
+  }
+
+  if (slot) {
+    return (
+      <div id={id} className={`ad ad-300 ad-live${fluid ? ' fluid' : ''} ${className}`.trim()} style={style}>
+        <span className="ad-tag">Ad</span>
+        <GoogleAd slot={slot} />
       </div>
     );
   }

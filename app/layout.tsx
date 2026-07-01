@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import Layout from "@/components/Layout";
 
@@ -15,6 +16,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-display="serif" data-ads="full">
+      <head>
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2083629374546177"
+          crossOrigin="anonymous"
+          strategy="beforeInteractive"
+        />
+      </head>
       <body>
         <Layout>{children}</Layout>
       </body>
