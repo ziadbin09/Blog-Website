@@ -29,18 +29,21 @@ export default function AdTimerNotice() {
         </span>
       ) : (
         <span
-          className="faint"
           style={{
             display: 'inline-flex',
             alignItems: 'center',
             gap: 8,
-            border: '1px solid var(--border)',
+            color: 'var(--text)',
+            background: 'var(--surface)',
+            border: '1.5px solid var(--accent-line)',
             borderRadius: 100,
             padding: '8px 18px',
             fontSize: 14,
+            fontWeight: 500,
           }}
         >
-          Loading ads&hellip; {secondsLeft}s
+          Loading ads&hellip;
+          <b style={{ color: 'var(--accent-text)', fontWeight: 700 }}>{secondsLeft}s</b>
         </span>
       )}
     </section>
