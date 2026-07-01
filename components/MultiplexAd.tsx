@@ -2,7 +2,9 @@ import GoogleAdMultiplex from './GoogleAdMultiplex';
 import { MULTIPLEX_SLOT } from '@/lib/ad-config';
 
 export default function MultiplexAd({ id, style }: { id: string; style?: React.CSSProperties }) {
-  if (!MULTIPLEX_SLOT) {
+  // Always show the placeholder box in local dev, so ad placement/sizing
+  // can be previewed without waiting on AdSense approval.
+  if (!MULTIPLEX_SLOT || process.env.NODE_ENV !== 'production') {
     return (
       <div id={id} className="ad ad-banner" style={style}>
         <span className="ad-tag">Ad</span>

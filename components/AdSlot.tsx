@@ -34,7 +34,9 @@ export default function AdSlot({
   className = '',
   style,
 }: AdSlotProps) {
-  const slot = SLOTS[size];
+  // Always show the placeholder box in local dev, so ad placement/sizing
+  // can be previewed without waiting on AdSense approval.
+  const slot = process.env.NODE_ENV === 'production' ? SLOTS[size] : undefined;
 
   if (size === 'large') {
     if (slot) {

@@ -2,7 +2,9 @@ import GoogleAdInArticle from './GoogleAdInArticle';
 import { IN_ARTICLE_SLOT } from '@/lib/ad-config';
 
 export default function InArticleAd({ id }: { id: string }) {
-  if (!IN_ARTICLE_SLOT) {
+  // Always show the placeholder box in local dev, so ad placement/sizing
+  // can be previewed without waiting on AdSense approval.
+  if (!IN_ARTICLE_SLOT || process.env.NODE_ENV !== 'production') {
     return (
       <div id={id} className="ad ad-banner" style={{ margin: '28px 0' }}>
         <span className="ad-tag">Ad</span>

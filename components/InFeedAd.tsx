@@ -2,7 +2,9 @@ import GoogleAdInFeed from './GoogleAdInFeed';
 import { IN_FEED } from '@/lib/ad-config';
 
 export default function InFeedAd({ id, style }: { id: string; style?: React.CSSProperties }) {
-  if (!IN_FEED) {
+  // Always show the placeholder box in local dev, so ad placement/sizing
+  // can be previewed without waiting on AdSense approval.
+  if (!IN_FEED || process.env.NODE_ENV !== 'production') {
     return (
       <div id={id} className="ad ad-300 fluid" style={style}>
         <span className="ad-tag">Ad</span>
